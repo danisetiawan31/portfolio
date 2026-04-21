@@ -1,14 +1,13 @@
 // app/admin/layout.tsx
 
 import type { ReactNode } from 'react'
-import { ThemeProvider } from 'next-themes'
 import { AdminSidebar } from '@/components/admin/admin-sidebar'
 
 import { Toaster } from '@/components/ui/sonner'
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <>
       <div className="flex min-h-screen">
         <AdminSidebar />
         {/* Offset content for fixed sidebar on desktop */}
@@ -17,6 +16,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
       <Toaster />
-    </ThemeProvider>
+    </>
   )
 }

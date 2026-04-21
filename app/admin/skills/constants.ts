@@ -1,0 +1,46 @@
+// app/admin/skills/constants.ts
+
+export const VALID_CATEGORIES = [
+  'frontend',
+  'backend',
+  'database',
+  'tools',
+] as const
+export type CategoryType = (typeof VALID_CATEGORIES)[number]
+
+export const AVAILABLE_ICONS = [
+  'Bootstrap',
+  'Flutter',
+  'Jira',
+  'R',
+  'Redux',
+  'codeigniter',
+  'css',
+  'dart',
+  'express',
+  'figma',
+  'firebase',
+  'github',
+  'html',
+  'java',
+  'js',
+  'jwt',
+  'laravel',
+  'mangodb',
+  'mysql',
+  'next',
+  'nodejs',
+  'php',
+  'postgree',
+  'postman',
+  'python',
+  'react',
+  'supabase',
+  'tableau',
+  'tail',
+  'ts',
+  'vercel',
+  'vite',
+  'zod',
+  'zustand',
+] as const

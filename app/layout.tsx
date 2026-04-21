@@ -1,6 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
+import { Providers } from '@/components/providers'
 import './globals.css'
 
 const inter = Inter({
@@ -31,7 +32,11 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        <Providers attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
