@@ -1,4 +1,4 @@
-// app/(admin)/admin/projects/page.tsx
+// app/admin/projects/page.tsx
 
 import Link from 'next/link'
 import { CheckCircle2, Minus, Pencil } from 'lucide-react'

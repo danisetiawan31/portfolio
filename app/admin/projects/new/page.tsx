@@ -1,4 +1,4 @@
-// app/(admin)/admin/projects/new/page.tsx
+// app/admin/projects/new/page.tsx
 
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'

@@ -1,8 +1,8 @@
-// app/(admin)/layout.tsx
+// app/admin/layout.tsx
 
 import type { ReactNode } from 'react'
 import { ThemeProvider } from 'next-themes'
-import { AdminSidebar } from './_components/admin-sidebar'
+import { AdminSidebar } from '@/components/admin/admin-sidebar'
 
 import { Toaster } from '@/components/ui/sonner'
 

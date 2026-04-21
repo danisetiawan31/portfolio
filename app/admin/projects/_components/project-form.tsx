@@ -1,4 +1,4 @@
-// app/(admin)/admin/projects/_components/project-form.tsx
+// app/admin/projects/_components/project-form.tsx
 
 'use client'
 

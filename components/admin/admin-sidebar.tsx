@@ -1,4 +1,4 @@
-// app/(admin)/_components/admin-sidebar.tsx
+// app/admin/_components/admin-sidebar.tsx
 
 'use client'
 

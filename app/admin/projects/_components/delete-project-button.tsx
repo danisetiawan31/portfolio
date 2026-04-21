@@ -1,10 +1,11 @@
-// app/(admin)/admin/projects/_components/delete-project-button.tsx
+// app/admin/projects/_components/delete-project-button.tsx
 
 'use client'
 
 import { useState } from 'react'
 import { Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { isRedirectError } from 'next/dist/client/components/redirect-error'
 import { Button } from '@/components/ui/button'
 import {
   AlertDialog,
@@ -32,8 +33,13 @@ export function DeleteProjectButton({ id, title }: DeleteProjectButtonProps) {
     try {
       await deleteProject(id)
       toast.success('Project deleted')
-    } catch {
-      toast.error('Failed to delete project')
+    } catch (error) {
+      if (isRedirectError(error)) return
+      if (error instanceof Error) {
+        toast.error(`Failed to delete project: ${error.message}`)
+      } else {
+        toast.error('Failed to delete project')
+      }
     } finally {
       setIsDeleting(false)
     }

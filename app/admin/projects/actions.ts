@@ -1,4 +1,4 @@
-// app/(admin)/admin/projects/actions.ts
+// app/admin/projects/actions.ts
 
 'use server'
 

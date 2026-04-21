@@ -1,4 +1,4 @@
-// app/(admin)/admin/login/actions.ts
+// app/admin/login/actions.ts
 
 'use server'
 

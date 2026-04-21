@@ -1,4 +1,4 @@
-// app/(admin)/admin/login/page.tsx
+// app/admin/login/page.tsx
 'use client'
 
 import { useActionState } from 'react'
