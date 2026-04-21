@@ -1,7 +1,9 @@
+// proxy.ts
+
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -25,7 +27,28 @@ export async function middleware(request: NextRequest) {
     },
   )
 
-  await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const { pathname } = request.nextUrl
+
+  // Protect all /admin routes except /admin/login
+  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+    if (!user) {
+      const loginUrl = request.nextUrl.clone()
+      loginUrl.pathname = '/admin/login'
+      return NextResponse.redirect(loginUrl)
+    }
+  }
+
+  // Redirect logged-in users away from /admin/login
+  if (pathname === '/admin/login' && user) {
+    const dashboardUrl = request.nextUrl.clone()
+    dashboardUrl.pathname = '/admin'
+    return NextResponse.redirect(dashboardUrl)
+  }
+
   return supabaseResponse
 }
 
