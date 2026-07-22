@@ -2,12 +2,11 @@ import * as React from 'react'
 import {
   Button as PrimitiveButton,
   buttonVariants,
-  type ButtonProps as PrimitiveButtonProps,
 } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-interface ButtonProps extends PrimitiveButtonProps {
+interface ButtonProps extends React.ComponentProps<typeof PrimitiveButton> {
   fullWidth?: boolean
   loading?: boolean
 }
