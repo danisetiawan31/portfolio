@@ -8,3 +8,5 @@
 - [5] Multi-select tech stack input — selesai, spec: workflow/tech-stack-tagselector.md
   Catatan: sumber opsi pakai konstanta statis (lib/constants/tech-stack-options.ts),
   bukan tabel skills — supaya tidak depend ke data skills yang masih minim.
+- [6] Project detail page (klik project → tampil full info) — selesai, spec: workflow/project-detail-page.md
+  Catatan: Live/GitHub URL null ditampilkan sebagai disabled state, bukan unrendered. Tombol Live/GitHub URL pakai <a> styled manual, bukan reuse komponen Button — konsisten visual dengan referensi desain. Tambahan di luar spec: ImageLightbox (klik thumbnail project → tampil fullscreen).

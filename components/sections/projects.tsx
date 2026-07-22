@@ -1,6 +1,4 @@
 // components/sections/projects.tsx
-// Server Component ringan — hanya menyediakan data + render ProjectCard
-// untuk proyek ke-4 dan seterusnya (index >= 3) di luar area transisi Hero.
 // Untuk 3 card pertama, rendering sudah diurus oleh HeroProjectsTransition.
 
 import {
@@ -10,6 +8,7 @@ import {
 import { ProjectCard } from './project-card'
 import { SectionContainer } from '@/components/common/section-container'
 import { SectionHeader } from '@/components/common/section-header'
+import Link from 'next/link'
 
 // ─── EmptyState ───────────────────────────────────────────────────────────────
 
@@ -24,7 +23,6 @@ export function EmptyState() {
 }
 
 // ─── ProjectsSection ──────────────────────────────────────────────────────────
-// Digunakan sebagai fallback / standalone jika HeroProjectsTransition tidak ada.
 // Dalam setup normal, section ini tidak dirender di page.tsx karena
 // seluruh projects sudah diurus oleh HeroProjectsTransition.
 
@@ -51,14 +49,14 @@ export default async function ProjectsSection() {
 
       {!isEmpty && (
         <div className="mt-16 flex justify-center">
-          <a
-            href="#"
-            className="group text-muted-foreground hover:text-foreground flex items-center gap-2 text-base font-medium transition-colors"
+          <Link
+            href="/projects"
+            className="group text-muted-foreground hover:text-primary flex items-center gap-2 text-base font-medium transition-colors"
           >
-            <span className="decoration-muted-foreground/30 group-hover:decoration-foreground underline underline-offset-4 transition-colors">
+            <span className="decoration-muted-foreground/30 group-hover:decoration-primary underline underline-offset-4 transition-colors">
               View all my projects
             </span>
-          </a>
+          </Link>
         </div>
       )}
     </SectionContainer>

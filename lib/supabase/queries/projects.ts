@@ -20,3 +20,20 @@ export async function getPublicProjects(): Promise<Project[]> {
 
   return data ?? []
 }
+
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('slug', slug)
+    .single()
+
+  if (error) {
+    console.error(`[getProjectBySlug] ${slug}:`, error.message)
+    return null
+  }
+
+  return data
+}

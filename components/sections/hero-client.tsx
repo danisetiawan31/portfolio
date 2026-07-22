@@ -1,7 +1,9 @@
+// components/sections/hero-clients.tsx
 'use client'
 
 import { useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   motion,
   useScroll,
@@ -213,16 +215,19 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
                   }}
                   className="absolute aspect-video w-[88%] overflow-hidden rounded-2xl border border-zinc-200/60 bg-white shadow-[0_24px_80px_rgba(0,0,0,0.14)] sm:w-[80%] dark:border-zinc-800/60 dark:bg-zinc-950"
                 >
-                  <div className="relative h-full w-full">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="block h-full w-full"
+                  >
                     {project.thumbnail_url ? (
                       <Image
                         src={project.thumbnail_url}
                         alt={project.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 hover:scale-105"
                       />
                     ) : (
-                      <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-900">
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-50 transition-colors hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800">
                         <span className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">
                           {project.title}
                         </span>
@@ -231,7 +236,7 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
                         </span>
                       </div>
                     )}
-                  </div>
+                  </Link>
                 </motion.div>
               ))}
             </div>
