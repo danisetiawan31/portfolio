@@ -5,6 +5,7 @@
 import { redirect } from 'next/navigation'
 import { isRedirectError } from 'next/dist/client/components/redirect-error'
 import { createServiceRoleClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/supabase/auth-guard'
 import { VALID_CATEGORIES, type CategoryType } from './constants'
 
 export type ActionResult = { errors: Record<string, string> }
@@ -43,6 +44,16 @@ export async function createSkill(
   const validation = validateSkillForm(formData)
   if (validation) return validation
 
+  try {
+    await requireAuth()
+  } catch (error) {
+    return {
+      errors: {
+        _form: error instanceof Error ? error.message : 'Unauthorized',
+      },
+    }
+  }
+
   const supabase = createServiceRoleClient()
 
   const iconRaw = formData.get('icon')?.toString().trim()
@@ -74,6 +85,16 @@ export async function updateSkill(
   const validation = validateSkillForm(formData)
   if (validation) return validation
 
+  try {
+    await requireAuth()
+  } catch (error) {
+    return {
+      errors: {
+        _form: error instanceof Error ? error.message : 'Unauthorized',
+      },
+    }
+  }
+
   const supabase = createServiceRoleClient()
 
   const iconRaw = formData.get('icon')?.toString().trim()
@@ -100,6 +121,8 @@ export async function updateSkill(
 }
 
 export async function deleteSkill(id: string): Promise<void> {
+  await requireAuth()
+
   const supabase = createServiceRoleClient()
 
   await supabase.from('skills').delete().eq('id', id)

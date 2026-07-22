@@ -4,6 +4,7 @@
 
 import { redirect } from 'next/navigation'
 import { createServiceRoleClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/supabase/auth-guard'
 import { parseTechStack } from '@/lib/utils/parse-tech-stack'
 
 // ---------------------------------------------------------------------------
@@ -108,6 +109,16 @@ export async function createProject(
   const validation = validateProjectForm(formData)
   if (validation) return validation
 
+  try {
+    await requireAuth()
+  } catch (error) {
+    return {
+      errors: {
+        _form: error instanceof Error ? error.message : 'Unauthorized',
+      },
+    }
+  }
+
   const supabase = createServiceRoleClient()
 
   const slugRaw = formData.get('slug') as string
@@ -151,6 +162,16 @@ export async function updateProject(
 ): Promise<ActionResult | null> {
   const validation = validateProjectForm(formData)
   if (validation) return validation
+
+  try {
+    await requireAuth()
+  } catch (error) {
+    return {
+      errors: {
+        _form: error instanceof Error ? error.message : 'Unauthorized',
+      },
+    }
+  }
 
   const supabase = createServiceRoleClient()
 
@@ -203,6 +224,8 @@ export async function updateProject(
 }
 
 export async function deleteProject(id: string): Promise<void> {
+  await requireAuth()
+
   const supabase = createServiceRoleClient()
 
   // Fetch thumbnail URL before deleting the row

@@ -5,6 +5,7 @@
 import { redirect } from 'next/navigation'
 import { isRedirectError } from 'next/dist/client/components/redirect-error'
 import { createServiceRoleClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/supabase/auth-guard'
 import { parseTechStack } from '@/lib/utils/parse-tech-stack'
 
 import { VALID_TYPES, type ExperienceType } from './constants'
@@ -61,6 +62,16 @@ export async function createExperience(
   const validation = validateExperienceForm(formData)
   if (validation) return validation
 
+  try {
+    await requireAuth()
+  } catch (error) {
+    return {
+      errors: {
+        _form: error instanceof Error ? error.message : 'Unauthorized',
+      },
+    }
+  }
+
   const supabase = createServiceRoleClient()
 
   const is_current = formData.get('is_current') === 'on'
@@ -97,6 +108,16 @@ export async function updateExperience(
   const validation = validateExperienceForm(formData)
   if (validation) return validation
 
+  try {
+    await requireAuth()
+  } catch (error) {
+    return {
+      errors: {
+        _form: error instanceof Error ? error.message : 'Unauthorized',
+      },
+    }
+  }
+
   const supabase = createServiceRoleClient()
 
   const is_current = formData.get('is_current') === 'on'
@@ -128,6 +149,8 @@ export async function updateExperience(
 }
 
 export async function deleteExperience(id: string): Promise<void> {
+  await requireAuth()
+
   const supabase = createServiceRoleClient()
 
   await supabase.from('experiences').delete().eq('id', id)
