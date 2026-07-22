@@ -11,6 +11,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { TagsSelector } from '@/components/ui/tags-selector'
+import { TECH_STACK_OPTIONS } from '@/lib/constants/tech-stack-options'
 import { createProject, updateProject } from '../actions'
 import type { Database } from '@/types/database'
 
@@ -150,14 +152,11 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
       {/* Tech Stack */}
       <div className="space-y-1.5">
-        <Label htmlFor="tech_stack">Tech Stack * (comma-separated)</Label>
-        <Input
-          id="tech_stack"
+        <Label htmlFor="tech_stack">Tech Stack *</Label>
+        <TagsSelector
           name="tech_stack"
-          placeholder="typescript, react, nextjs"
-          defaultValue={project?.tech_stack.join(', ')}
-          disabled={isPending}
-          aria-invalid={!!state?.errors.tech_stack}
+          tags={TECH_STACK_OPTIONS}
+          defaultValue={project?.tech_stack}
         />
         {state?.errors.tech_stack && (
           <p role="alert" className="text-destructive text-xs">

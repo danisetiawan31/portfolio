@@ -5,3 +5,6 @@
 - [2] CRUD Projects (create, read, update, delete, thumbnail upload) — selesai, tidak ada spec file
 - [3] CRUD Experiences (create, read, update, delete) — selesai, tidak ada spec file
 - [4] CRUD Skills (create, read, update, delete) — selesai, tidak ada spec file
+- [5] Multi-select tech stack input — selesai, spec: workflow/tech-stack-tagselector.md
+  Catatan: sumber opsi pakai konstanta statis (lib/constants/tech-stack-options.ts),
+  bukan tabel skills — supaya tidak depend ke data skills yang masih minim.

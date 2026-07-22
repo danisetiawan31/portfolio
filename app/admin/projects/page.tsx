@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { CheckCircle2, Minus, Pencil } from 'lucide-react'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { Badge } from '@/components/ui/badge'
+import { TechBadge } from '@/components/common/tech-badge'
 import { Button } from '@/components/ui/button'
 import {
   Table,
@@ -71,13 +72,12 @@ export default async function AdminProjectsPage() {
                           {project.tech_stack
                             .slice(0, 3)
                             .map((tech: string) => (
-                              <Badge
+                              <TechBadge
                                 key={tech}
-                                variant="secondary"
-                                className="font-normal"
-                              >
-                                {tech}
-                              </Badge>
+                                label={tech}
+                                size="sm"
+                                showLabel={false}
+                              />
                             ))}
                           {project.tech_stack.length > 3 && (
                             <Badge
