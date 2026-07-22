@@ -61,3 +61,6 @@ next-env.d.ts
 #misc
 *.pem
 .agents
+
+# reset-password
+reset-admin-password.mjs
