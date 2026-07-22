@@ -47,3 +47,11 @@ shadcn/ui components: Button, Input, Label, Textarea, Checkbox
 
 Icons public/icons/ filenames inconsistent casing (ts.svg, Bootstrap.svg, mangodb.svg)
 Normalize naming before Phase 4 public Skills section renders them
+
+DESIGN SYSTEM
+Font Inter (--font-sans) for headings via font-heading utility
+Geist Mono (--font-mono) for code
+Theme Light: bg #FFFFFF, surface #F5F3FF, primary #7C5CE4
+Dark: bg #1C1C1C, surface #2C303D, primary #A089E6
+Animation Medium — page transitions, section reveals, hover states
+Providers components/providers.tsx — wraps Providers in app/layout.tsx
