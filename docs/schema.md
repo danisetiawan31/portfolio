@@ -42,6 +42,18 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-​`
+    certificates {
+        uuid id PK
+        string title
+        string issuer
+        date issue_date
+        string image_url
+        string credential_url
+        boolean is_featured
+        int display_order
+        timestamp created_at
+        timestamp updated_at
+    }
+`
 
-**Storage:** bucket `thumbnails`, public, max 10MB, MIME jpeg/png/webp. Upload via `createServiceRoleClient()`.
+**Storage:** bucket `thumbnails`, public, max 10MB, MIME jpeg/png/webp. Upload via `createServiceRoleClient()`. Digunakan untuk projects dan certificates.

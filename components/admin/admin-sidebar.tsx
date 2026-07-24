@@ -18,6 +18,7 @@ import {
   LogOut,
   Menu,
   X,
+  Award,
 } from 'lucide-react'
 
 interface NavItem {
@@ -31,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Projects', href: '/admin/projects', icon: FolderKanban },
   { label: 'Experiences', href: '/admin/experiences', icon: Briefcase },
   { label: 'Skills', href: '/admin/skills', icon: Wrench },
+  { label: 'Certificates', href: '/admin/certificates', icon: Award },
 ]
 
 export function AdminSidebar() {

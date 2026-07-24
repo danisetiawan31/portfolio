@@ -41,11 +41,11 @@ Flat, tidak pakai route group Next.js. `app/admin/...` langsung, homepage di `ap
 ### Auth
 
 - Supabase Auth, single admin user (tidak ada role/tier lain).
-- Proteksi route `/admin/*` dilakukan di `middleware.ts` (root project) — cek session via `supabase.auth.getUser()`, redirect ke `/admin/login` kalau tidak ada user, dan redirect user yang sudah login menjauh dari `/admin/login`.
-- Tidak ada pengecekan auth tambahan di level komponen/layout (`app/admin/layout.tsx` cs.) — middleware adalah satu-satunya garis pertahanan untuk route ini. Kalau ada penambahan admin API route baru di luar pola `/admin/*` (misal Route Handler admin-only), wajib cek eksplisit apakah tercakup matcher middleware atau perlu proteksi manual sendiri.
+- Proteksi route `/admin/*` dilakukan di `proxy.ts` (root project — Next.js 16+ menggantikan konvensi lama `middleware.ts` yang di-deprecate) — cek session via `supabase.auth.getUser()`, redirect ke `/admin/login` kalau tidak ada user, dan redirect user yang sudah login menjauh dari `/admin/login`.
+- Tidak ada pengecekan auth tambahan di level komponen/layout (`app/admin/layout.tsx` cs.) — proxy adalah satu-satunya garis pertahanan untuk route ini. Kalau ada penambahan admin API route baru di luar pola `/admin/*` (misal Route Handler admin-only), wajib cek eksplisit apakah tercakup matcher proxy atau perlu proteksi manual sendiri.
 - Setiap Server Action admin yang melakukan operasi tulis (insert/update/delete)
   wajib memanggil requireAuth() (lib/supabase/auth-guard.ts) di awal fungsi,
-  SEBELUM createServiceRoleClient() dipanggil — middleware bukan satu-satunya
+  SEBELUM createServiceRoleClient() dipanggil — proxy bukan satu-satunya
   lapisan proteksi lagi.
 
 ### Kode
@@ -64,6 +64,19 @@ Flat, tidak pakai route group Next.js. `app/admin/...` langsung, homepage di `ap
 - Fitur dengan spec file: tulis test Playwright/Vitest sesuai section "Testing" di spec, lalu jalankan.
 - Fitur cuma dapat prompt langsung: tidak wajib test otomatis kecuali diminta eksplisit.
 - Test gagal → retry maks 2x. Masih gagal → STOP, laporkan test gagal + dugaan penyebab, jangan update `done.md`.
+
+## Kebijakan implementasi bertahap
+
+- Untuk fitur dengan spec file (workflow/<fitur>.md) yang menyentuh lebih
+  dari 1 layer (skema data, data layer, UI): implementasi WAJIB bertahap,
+  bukan sekaligus dalam 1 sesi. Urutan baku: (1) skema data & RLS,
+  (2) data layer (query/Server Action), (3) UI (form/komponen),
+  (4) test/verifikasi.
+- Setelah 1 tahap selesai, laporkan hasilnya dan TUNGGU konfirmasi user
+  sebelum lanjut ke tahap berikutnya — jangan lanjut otomatis meski
+  prompt/spec menyebutkan seluruh scope fitur.
+- Fitur yang cuma dapat prompt langsung (tier ringkas) dikecualikan dari
+  kebijakan ini.
 
 ## Update done.md
 

@@ -15,6 +15,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      certificates: {
+        Row: {
+          created_at: string
+          credential_url: string | null
+          display_order: number
+          id: string
+          image_url: string | null
+          is_featured: boolean
+          issue_date: string
+          issuer: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          credential_url?: string | null
+          display_order?: number
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          issue_date: string
+          issuer: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          credential_url?: string | null
+          display_order?: number
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          issue_date?: string
+          issuer?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       experiences: {
         Row: {
           company: string
