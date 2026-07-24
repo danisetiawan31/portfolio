@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
-import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface ImageLightboxProps {
@@ -63,7 +62,7 @@ export function ImageLightbox({
           alt={alt}
           width={width}
           height={height}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           priority={priority}
         />
 
@@ -82,15 +81,6 @@ export function ImageLightbox({
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm sm:p-8"
             onClick={() => setIsOpen(false)}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 z-50 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 sm:top-8 sm:right-8"
-              aria-label="Close fullscreen image"
-            >
-              <X className="h-6 w-6" />
-            </button>
-
             {/* Full Image Container */}
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}

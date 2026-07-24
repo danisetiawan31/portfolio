@@ -24,7 +24,7 @@ export const NAV_ITEMS: NavItem[] = [
   { name: 'Skills', link: '/#skills', icon: <IconCode size={16} /> },
   {
     name: 'Certificates',
-    link: '/certificates',
+    link: '/#certificates',
     icon: <IconCertificate size={16} />,
   },
   { name: 'Contact', link: '/#contact', icon: <IconMail size={16} /> },

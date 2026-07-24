@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { SectionContainer } from '@/components/common/section-container'
 import { SectionHeader } from '@/components/common/section-header'
 import { CertificateCard } from '@/components/sections/certificate-card'
+import { FadeUpOnScroll } from '@/components/common/fade-up-on-scroll'
 import Link from 'next/link'
 
 export default async function CertificatesSection() {
@@ -26,9 +27,11 @@ export default async function CertificatesSection() {
         subtitle="Professional credentials and certifications."
       />
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {certificates.map((cert) => (
-          <CertificateCard key={cert.id} certificate={cert} />
+      <div className="cert-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {certificates.map((cert, index) => (
+          <FadeUpOnScroll key={cert.id} delay={index * 0.05}>
+            <CertificateCard certificate={cert} />
+          </FadeUpOnScroll>
         ))}
       </div>
 

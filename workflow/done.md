@@ -10,10 +10,8 @@
   bukan tabel skills — supaya tidak depend ke data skills yang masih minim.
 - [6] Project detail page (klik project → tampil full info) — selesai, spec: workflow/project-detail-page.md
   Catatan: Live/GitHub URL null ditampilkan sebagai disabled state, bukan unrendered. Tombol Live/GitHub URL pakai <a> styled manual, bukan reuse komponen Button — konsisten visual dengan referensi desain. Tambahan di luar spec: ImageLightbox (klik thumbnail project → tampil fullscreen).
-- [7] Certificate section (public + admin CRUD) — selesai, spec: workflow/certificate-section.md
-  Catatan: Server Action awal tidak pakai revalidatePath, menyebabkan cache
-  basi setelah create/update di admin — ditambahkan setelahnya. Bug
-  runtime crash (state?.errors.\_form tanpa optional chaining kedua) di
-  form Certificate juga ditemukan & diperbaiki saat testing manual.
-  Perubahan tidak diminta di luar scope Certificate (retrofit ke 3
-  modul CRUD lama) sempat menyebabkan bug caching baru — sudah di-revert.
+- [7] Certificate Section & UI Redesign (public + admin) — selesai, spec: workflow/certificate-section.md & workflow/certificate-ui.md
+  Catatan (Keputusan Final):
+  - Data Layer: Server Action wajib menggunakan `revalidatePath` agar cache ter-update pasca mutasi data.
+  - Public UI: Efek hover blur-siblings menggunakan murni CSS `:has()`, badge Verified memakai token custom `--success`, interaksi gambar via `ImageLightbox`, dan layout `/certificates` disamakan dengan pola halaman `/projects`.
+  - Admin UI: Root wrapper form admin menggunakan `<div>` (menghindari isu semantik `<main>` bersarang), tabel certificates ditambah preview image lightbox, dan tabel skills menggunakan komponen visual `TechBadge`.

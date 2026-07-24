@@ -70,18 +70,18 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
   })
 
   // ── Hero card transforms ───────────────────────────────────────────────────
-  const y1 = useTransform(smoothProgress, [0, 1], [0, 700])
-  const y2 = useTransform(smoothProgress, [0, 1], [0, 500])
-  const y3 = useTransform(smoothProgress, [0, 1], [0, 320])
-  const yTransforms = [y1, y2, y3]
+  const y1 = useTransform(smoothProgress, [0, 1], [0, 700]) // Bottom card
+  const y2 = useTransform(smoothProgress, [0, 1], [0, 500]) // Middle card
+  const y3 = useTransform(smoothProgress, [0, 1], [0, 320]) // Top card
+  const yTransforms = [y3, y2, y1] // Index 0 (Project A) gets y3
 
   const opacity = useTransform(smoothProgress, [0.45, 0.85], [1, 0])
   const scale = useTransform(smoothProgress, [0, 1], [1, 0.88])
 
   const heroCardStyles = [
-    { rotate: -6, x: -60, zIndex: 10 },
-    { rotate: 4, x: 40, zIndex: 20 },
-    { rotate: -2, x: 0, zIndex: 30 },
+    { rotate: -2, x: 0, zIndex: 30 }, // Index 0 (Project A) -> Top
+    { rotate: 4, x: 40, zIndex: 20 }, // Index 1 (Project B) -> Middle
+    { rotate: -6, x: -60, zIndex: 10 }, // Index 2 (Project C) -> Bottom
   ]
 
   const displayProjects = projects.slice(0, 3)

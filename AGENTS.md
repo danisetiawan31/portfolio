@@ -77,6 +77,7 @@ Flat, tidak pakai route group Next.js. `app/admin/...` langsung, homepage di `ap
   prompt/spec menyebutkan seluruh scope fitur.
 - Fitur yang cuma dapat prompt langsung (tier ringkas) dikecualikan dari
   kebijakan ini.
+- "State sukses/positif pakai token --success, mengikuti pola pasangan --destructive.
 
 ## Update done.md
 

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Pencil } from 'lucide-react'
 import { createServiceRoleClient } from '@/lib/supabase/server'
-import { Badge } from '@/components/ui/badge'
+import { TechBadge } from '@/components/common/tech-badge'
 import { Button } from '@/components/ui/button'
 import {
   Table,
@@ -81,12 +81,7 @@ export default async function AdminSkillsPage() {
                         </TableCell>
                         <TableCell>
                           {skill.icon ? (
-                            <Badge
-                              variant="outline"
-                              className="text-muted-foreground font-normal"
-                            >
-                              {skill.icon}
-                            </Badge>
+                            <TechBadge label={skill.icon} size="md" />
                           ) : (
                             <span className="text-muted-foreground">—</span>
                           )}

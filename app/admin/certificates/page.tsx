@@ -1,9 +1,10 @@
 // app/admin/certificates/page.tsx
 
 import Link from 'next/link'
-import { CheckCircle2, Minus, Pencil } from 'lucide-react'
+import { CheckCircle2, Minus, Pencil, Award } from 'lucide-react'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
+import { ImageLightbox } from '@/components/common/image-lightbox'
 import {
   Table,
   TableBody,
@@ -19,7 +20,7 @@ export default async function AdminCertificatesPage() {
 
   const { data: certificates, error } = await supabase
     .from('certificates')
-    .select('id, title, issuer, is_featured, display_order')
+    .select('id, title, issuer, is_featured, display_order, image_url')
     .order('display_order', { ascending: true })
 
   if (error) {
@@ -51,6 +52,7 @@ export default async function AdminCertificatesPage() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-[100px]">Image</TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>Issuer</TableHead>
                 <TableHead className="text-center">Featured</TableHead>
@@ -61,6 +63,23 @@ export default async function AdminCertificatesPage() {
             <TableBody>
               {certificates.map((cert) => (
                 <TableRow key={cert.id}>
+                  <TableCell>
+                    {cert.image_url ? (
+                      <div className="h-12 w-20 overflow-hidden rounded-md border">
+                        <ImageLightbox
+                          src={cert.image_url}
+                          alt={cert.title}
+                          width={80}
+                          height={45}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="bg-muted flex h-12 w-20 items-center justify-center rounded-md border">
+                        <Award className="text-muted-foreground/30 h-5 w-5" />
+                      </div>
+                    )}
+                  </TableCell>
                   <TableCell className="font-medium">{cert.title}</TableCell>
                   <TableCell>{cert.issuer}</TableCell>
                   <TableCell className="text-center">

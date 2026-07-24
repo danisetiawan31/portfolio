@@ -29,6 +29,8 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -76,6 +78,9 @@
 
   --destructive: oklch(0.577 0.245 27.325);
 
+  --success: oklch(0.52 0.17 145);
+  --success-foreground: oklch(1 0 0);
+
   --border: oklch(0.908 0.013 252);
   --input: oklch(0.908 0.013 252);
   --ring: oklch(0.551 0.231 292.6);
@@ -114,6 +119,9 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+
+  --success: oklch(0.68 0.18 145);
+  --success-foreground: oklch(0.145 0 0);
   --border: oklch(0.301 0.031 265.8);
   --input: oklch(0.301 0.031 265.8);
   --ring: oklch(0.651 0.182 292.8);
@@ -148,13 +156,21 @@
 /* ── Marquee animations ────────────────────────────────────────────────────── */
 
 @keyframes marquee-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes marquee-right {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .animate-marquee-left {
@@ -168,8 +184,12 @@
 /* ── Moving border (conic-gradient spin) ───────────────────────────────────── */
 
 @keyframes border-spin {
-  from { --border-angle: 0deg; }
-  to   { --border-angle: 360deg; }
+  from {
+    --border-angle: 0deg;
+  }
+  to {
+    --border-angle: 360deg;
+  }
 }
 
 @property --border-angle {
@@ -233,8 +253,36 @@
 }
 
 @keyframes gradient-shift {
-  0%   { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
+/* ── Certificate grid: hover blur-siblings ──────────────────────────────────
+   Saat salah satu .cert-card di-hover, semua sibling (.cert-card:not(:hover))
+   jadi blur + dim. Card yang di-hover sendiri tetap normal.
+   Menggunakan :has() — no JS, no Client Component required.
+   ────────────────────────────────────────────────────────────────────────── */
 
+.cert-grid .cert-card {
+  transition:
+    opacity 300ms ease,
+    filter 300ms ease;
+}
+
+.cert-grid:has(.cert-card:hover) .cert-card:not(:hover) {
+  opacity: 0.45;
+  filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-grid .cert-card,
+  .cert-grid:has(.cert-card:hover) .cert-card:not(:hover) {
+    transition: none;
+    filter: none;
+    opacity: 1;
+  }
+}
