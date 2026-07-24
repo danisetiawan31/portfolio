@@ -23,7 +23,7 @@ export default async function EditSkillPage({ params }: EditSkillPageProps) {
   if (error || !skill) notFound()
 
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-8">
       <div>
         <Link
           href="/admin/skills"
@@ -35,6 +35,6 @@ export default async function EditSkillPage({ params }: EditSkillPageProps) {
         <h1 className="text-2xl font-bold tracking-tight">Edit Skill</h1>
       </div>
       <SkillForm skill={skill} />
-    </main>
+    </div>
   )
 }

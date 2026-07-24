@@ -6,7 +6,7 @@ import { SkillForm } from '../_components/skill-form'
 
 export default function NewSkillPage() {
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-8">
       <div>
         <Link
           href="/admin/skills"
@@ -18,6 +18,6 @@ export default function NewSkillPage() {
         <h1 className="text-2xl font-bold tracking-tight">New Skill</h1>
       </div>
       <SkillForm />
-    </main>
+    </div>
   )
 }

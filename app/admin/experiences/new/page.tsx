@@ -6,7 +6,7 @@ import { ExperienceForm } from '../_components/experience-form'
 
 export default function NewExperiencePage() {
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-8">
       <div>
         <Link
           href="/admin/experiences"
@@ -18,6 +18,6 @@ export default function NewExperiencePage() {
         <h1 className="text-2xl font-bold tracking-tight">New Experience</h1>
       </div>
       <ExperienceForm />
-    </main>
+    </div>
   )
 }

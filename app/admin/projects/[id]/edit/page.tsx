@@ -25,7 +25,7 @@ export default async function EditProjectPage({
   if (error || !project) notFound()
 
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-8">
       <div>
         <Link
           href="/admin/projects"
@@ -37,6 +37,6 @@ export default async function EditProjectPage({
         <h1 className="text-2xl font-bold tracking-tight">Edit Project</h1>
       </div>
       <ProjectForm project={project} />
-    </main>
+    </div>
   )
 }

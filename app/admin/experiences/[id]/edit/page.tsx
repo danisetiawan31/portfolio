@@ -25,7 +25,7 @@ export default async function EditExperiencePage({
   if (error || !experience) notFound()
 
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-8">
       <div>
         <Link
           href="/admin/experiences"
@@ -37,6 +37,6 @@ export default async function EditExperiencePage({
         <h1 className="text-2xl font-bold tracking-tight">Edit Experience</h1>
       </div>
       <ExperienceForm experience={experience} />
-    </main>
+    </div>
   )
 }

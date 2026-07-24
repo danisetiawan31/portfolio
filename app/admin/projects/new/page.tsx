@@ -6,7 +6,7 @@ import { ProjectForm } from '../_components/project-form'
 
 export default function NewProjectPage() {
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-8">
       <div>
         <Link
           href="/admin/projects"
@@ -18,6 +18,6 @@ export default function NewProjectPage() {
         <h1 className="text-2xl font-bold tracking-tight">New Project</h1>
       </div>
       <ProjectForm />
-    </main>
+    </div>
   )
 }
