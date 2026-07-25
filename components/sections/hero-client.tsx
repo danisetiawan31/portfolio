@@ -12,7 +12,26 @@ import {
   type Variants,
 } from 'framer-motion'
 import { Download } from 'lucide-react'
+import {
+  Marquee,
+  MarqueeContent,
+  MarqueeItem,
+} from '@/components/kibo-ui/marquee'
 import { type Project } from '@/lib/supabase/queries/projects'
+
+// ── Data ────────────────────────────────────────────────────────────────────
+const techStackLogos = [
+  { src: '/icons/php.svg', alt: 'PHP' },
+  { src: '/icons/react.svg', alt: 'React' },
+  { src: '/icons/ts.svg', alt: 'TypeScript' },
+  { src: '/icons/tail.svg', alt: 'Tailwind CSS' },
+  { src: '/icons/mysql.svg', alt: 'MySQL' },
+  { src: '/icons/postgree.svg', alt: 'PostgreSQL' },
+  { src: '/icons/dock.svg', alt: 'Docker' },
+  { src: '/icons/nodejs.svg', alt: 'Node.js' },
+  { src: '/icons/python.svg', alt: 'Python' },
+  { src: '/icons/postman.svg', alt: 'Postman' },
+]
 
 // ── Entrance animation variants ───────────────────────────────────────────────
 const containerVariants: Variants = {
@@ -90,11 +109,11 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
     <section id="hero" className="relative w-full overflow-hidden">
       <div
         ref={containerRef}
-        className="relative mx-auto flex min-h-[60vh] max-w-7xl flex-col items-center justify-between gap-12 px-6 pt-12 lg:flex-row lg:items-start lg:pt-16"
+        className="relative mx-auto flex min-h-[60vh] max-w-7xl flex-col items-center justify-between gap-12 px-6 pt-20 lg:flex-row lg:items-start lg:pt-16"
       >
         {/* ── LEFT COLUMN ───────────────────────────────────────────────────── */}
         <motion.div
-          className="flex w-full flex-col items-start gap-7 lg:w-1/2"
+          className="flex w-full flex-col items-start gap-4 lg:w-1/2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -141,11 +160,30 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
             className="max-w-[42ch] text-base leading-relaxed text-zinc-500 dark:text-zinc-400"
           >
             <span className="font-medium text-zinc-800 dark:text-zinc-200">
-              I build reliable, scalable web apps — not just pretty interfaces.
+              I design, build, and deliver reliable web applications with
             </span>{' '}
-            From database design to deployment, I handle the full stack so your
-            product actually works in production.
+            a focus on scalability, usability, and long-term maintainability.
           </motion.p>
+
+          {/* Trust Indicators */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-6 py-2"
+          >
+            <div className="flex flex-col">
+              <span className="text-foreground text-2xl font-bold">1+</span>
+              <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                Years Exp.
+              </span>
+            </div>
+            <div className="bg-border h-10 w-px"></div>
+            <div className="flex flex-col">
+              <span className="text-foreground text-2xl font-bold">8+</span>
+              <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                Projects Built
+              </span>
+            </div>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -200,45 +238,67 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
 
         {/* ── RIGHT COLUMN — project card stack ─────────────────────────────── */}
         {displayProjects.length > 0 && (
-          <div className="relative h-[480px] w-full lg:h-[640px] lg:w-1/2">
-            <div className="absolute inset-0 flex items-center justify-center">
-              {displayProjects.map((project, idx) => (
-                <motion.div
-                  key={project.id}
-                  style={{
-                    y: yTransforms[idx % 3],
-                    opacity,
-                    scale,
-                    rotate: heroCardStyles[idx % 3].rotate,
-                    x: heroCardStyles[idx % 3].x,
-                    zIndex: heroCardStyles[idx % 3].zIndex,
-                  }}
-                  className="absolute aspect-video w-[88%] overflow-hidden rounded-2xl border border-zinc-200/60 bg-white shadow-[0_24px_80px_rgba(0,0,0,0.14)] sm:w-[80%] dark:border-zinc-800/60 dark:bg-zinc-950"
-                >
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="block h-full w-full"
-                  >
-                    {project.thumbnail_url ? (
+          <div className="relative flex h-[480px] w-full flex-col lg:h-[640px] lg:w-1/2">
+            {/* Tech Stack Marquee */}
+            <div className="mt-4 mb-2 w-full lg:mt-12 lg:mb-2">
+              <Marquee className="[mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+                <MarqueeContent>
+                  {techStackLogos.map((logo) => (
+                    <MarqueeItem key={logo.alt}>
                       <Image
-                        src={project.thumbnail_url}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-500 hover:scale-105"
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={100}
+                        height={40}
+                        className="mx-6 h-8 w-auto object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0 dark:opacity-50 dark:invert"
                       />
-                    ) : (
-                      <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-50 transition-colors hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800">
-                        <span className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">
-                          {project.title}
-                        </span>
-                        <span className="mt-1 text-xs text-zinc-400 dark:text-zinc-600">
-                          Preview
-                        </span>
-                      </div>
-                    )}
-                  </Link>
-                </motion.div>
-              ))}
+                    </MarqueeItem>
+                  ))}
+                </MarqueeContent>
+              </Marquee>
+            </div>
+
+            {/* Project Stack */}
+            <div className="relative w-full flex-1">
+              <div className="absolute inset-0 flex items-center justify-center">
+                {displayProjects.map((project, idx) => (
+                  <motion.div
+                    key={project.id}
+                    style={{
+                      y: yTransforms[idx % 3],
+                      opacity,
+                      scale,
+                      rotate: heroCardStyles[idx % 3].rotate,
+                      x: heroCardStyles[idx % 3].x,
+                      zIndex: heroCardStyles[idx % 3].zIndex,
+                    }}
+                    className="absolute aspect-video w-[88%] overflow-hidden rounded-2xl border border-zinc-200/60 bg-white shadow-[0_24px_80px_rgba(0,0,0,0.14)] sm:w-[80%] dark:border-zinc-800/60 dark:bg-zinc-950"
+                  >
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="block h-full w-full"
+                    >
+                      {project.thumbnail_url ? (
+                        <Image
+                          src={project.thumbnail_url}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-50 transition-colors hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800">
+                          <span className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">
+                            {project.title}
+                          </span>
+                          <span className="mt-1 text-xs text-zinc-400 dark:text-zinc-600">
+                            Preview
+                          </span>
+                        </div>
+                      )}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         )}
