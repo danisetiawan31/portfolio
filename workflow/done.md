@@ -15,3 +15,9 @@
   - Data Layer: Server Action wajib menggunakan `revalidatePath` agar cache ter-update pasca mutasi data.
   - Public UI: Efek hover blur-siblings menggunakan murni CSS `:has()`, badge Verified memakai token custom `--success`, interaksi gambar via `ImageLightbox`, dan layout `/certificates` disamakan dengan pola halaman `/projects`.
   - Admin UI: Root wrapper form admin menggunakan `<div>` (menghindari isu semantik `<main>` bersarang), tabel certificates ditambah preview image lightbox, dan tabel skills menggunakan komponen visual `TechBadge`.
+- [8] Footer Section — selesai, spec: workflow/footer.md
+  Catatan:
+  - Data: Mengekstrak hardcoded social links dari `contact.tsx` menjadi `SOCIAL_LINKS` di `constants.tsx` (single source of truth).
+  - UI: Menggabungkan `NAV_ITEMS` dan `SOCIAL_LINKS` dalam satu baris, menambahkan efek wordmark besar "dhani" dengan CSS `mask-image` linear gradient agar memudar ke bawah.
+  - Responsive: Ditambahkan styling kondisional pada wordmark (margin negatif dan line-height bertahap: `leading-[0.85]` di mobile dan `leading-[0.75]` di desktop) agar potongan (crop) terbawah teks tetap proporsional tanpa terpotong terlalu agresif di layar kecil.
+  - Wiring: Komponen hanya di-render di halaman utama Landing page (`app/page.tsx`).

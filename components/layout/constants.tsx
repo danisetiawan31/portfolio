@@ -1,10 +1,11 @@
 import {
-  IconUser,
   IconBriefcase,
   IconTimeline,
   IconCode,
   IconMail,
   IconCertificate,
+  IconBrandGithub,
+  IconBrandLinkedin,
 } from '@tabler/icons-react'
 
 export type NavItem = {
@@ -14,7 +15,6 @@ export type NavItem = {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { name: 'About', link: '/#about', icon: <IconUser size={16} /> },
   { name: 'Projects', link: '/#projects', icon: <IconBriefcase size={16} /> },
   {
     name: 'Experience',
@@ -28,4 +28,17 @@ export const NAV_ITEMS: NavItem[] = [
     icon: <IconCertificate size={16} />,
   },
   { name: 'Contact', link: '/#contact', icon: <IconMail size={16} /> },
+]
+
+export const SOCIAL_LINKS = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/danisetiawan31',
+    icon: <IconBrandGithub size={18} />,
+  },
+  {
+    name: 'LinkedIn',
+    url: 'https://linkedin.com/in/ahmaddhanisetiawan',
+    icon: <IconBrandLinkedin size={18} />,
+  },
 ]

@@ -1,14 +1,10 @@
 // components/sections/contact.tsx
 
-import {
-  IconMail,
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconMapPin,
-} from '@tabler/icons-react'
+import { IconMail, IconMapPin } from '@tabler/icons-react'
 import { SectionContainer } from '@/components/common/section-container'
 import { SectionHeader } from '@/components/common/section-header'
 import { ContactForm } from '@/components/sections/contact-form'
+import { SOCIAL_LINKS } from '@/components/layout/constants'
 
 // ─── Contact info card ────────────────────────────────────────────────────────
 
@@ -60,29 +56,19 @@ function ContactInfo() {
           </a>
         </InfoCard>
 
-        {/* GitHub */}
-        <InfoCard icon={<IconBrandGithub size={18} />} label="GitHub">
-          <a
-            href="https://github.com/danisetiawan31"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground hover:text-primary truncate text-sm font-medium transition-colors"
-          >
-            github.com/danisetiawan31
-          </a>
-        </InfoCard>
-
-        {/* LinkedIn */}
-        <InfoCard icon={<IconBrandLinkedin size={18} />} label="LinkedIn">
-          <a
-            href="https://linkedin.com/in/ahmaddhanisetiawan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground hover:text-primary truncate text-sm font-medium transition-colors"
-          >
-            linkedin.com/in/ahmaddhanisetiawan
-          </a>
-        </InfoCard>
+        {/* Social Links */}
+        {SOCIAL_LINKS.map((social) => (
+          <InfoCard key={social.name} icon={social.icon} label={social.name}>
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-primary truncate text-sm font-medium transition-colors"
+            >
+              {social.url.replace(/^https?:\/\//, '')}
+            </a>
+          </InfoCard>
+        ))}
 
         {/* Location */}
         <InfoCard icon={<IconMapPin size={18} />} label="Location">

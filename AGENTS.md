@@ -18,7 +18,11 @@ Portfolio pribadi untuk melamar kerja sebagai Fullstack Developer. Target pembac
 10. Animation — Framer Motion
 11. Deployment — Vercel
 
-**Dieliminasi dari scope:** GitHub Activity section — setup rumit, benefit rendah.
+**Dieliminasi dari scope:**
+
+- GitHub Activity section — setup rumit, benefit rendah.
+- About section — redundan dengan konten yang sudah ada di Hero, CV, dan
+  section lain; tidak menambah informasi baru bagi pembaca.
 
 > Status pengerjaan tiap item (sudah aktif / belum dimulai) dilacak di `workflow/backlog.md` dan `workflow/done.md`, bukan di sini — supaya tidak ada dua tempat yang harus disinkronkan manual tiap kali progres berubah.
 
