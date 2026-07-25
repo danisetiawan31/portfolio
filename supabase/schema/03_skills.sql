@@ -7,18 +7,16 @@
 CREATE TABLE skills (
   id            uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   name          text        NOT NULL,
-  category      text        NOT NULL,
-  context       text        NOT NULL,
-  icon          text,
+  category      text        NOT NULL CHECK (category IN ('languages', 'frontend', 'backend_infra', 'database')),
+  is_visible    boolean     NOT NULL DEFAULT true,
   display_order integer     NOT NULL DEFAULT 0,
   created_at    timestamptz NOT NULL DEFAULT now(),
   updated_at    timestamptz NOT NULL DEFAULT now(),
 
-  -- Prevent duplicate skill names within the same category.
-  CONSTRAINT uq_skills_name_category UNIQUE (name, category)
+  -- Prevent duplicate skill names entirely.
+  CONSTRAINT uq_skills_name UNIQUE (name)
 );
 
--- =============================================================================
 -- Trigger: reuse shared set_updated_at() — do NOT redefine the function here
 -- =============================================================================
 
@@ -27,7 +25,6 @@ CREATE TRIGGER skills_set_updated_at
   FOR EACH ROW
   EXECUTE FUNCTION set_updated_at();
 
--- =============================================================================
 -- Row Level Security
 -- =============================================================================
 
@@ -39,10 +36,8 @@ CREATE POLICY "skills_public_read"
   TO anon, authenticated
   USING (true);
 
--- =============================================================================
 -- Indexes
 -- Note: UNIQUE (name, category) implicitly creates an index on that pair.
--- The indexes below cover standalone queries on category and display_order.
 -- =============================================================================
 
 CREATE INDEX idx_skills_category      ON skills (category);

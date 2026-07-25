@@ -147,31 +147,28 @@ export type Database = {
       skills: {
         Row: {
           category: string
-          context: string
           created_at: string
           display_order: number
-          icon: string | null
           id: string
+          is_visible: boolean
           name: string
           updated_at: string
         }
         Insert: {
           category: string
-          context: string
           created_at?: string
           display_order?: number
-          icon?: string | null
           id?: string
+          is_visible?: boolean
           name: string
           updated_at?: string
         }
         Update: {
           category?: string
-          context?: string
           created_at?: string
           display_order?: number
-          icon?: string | null
           id?: string
+          is_visible?: boolean
           name?: string
           updated_at?: string
         }

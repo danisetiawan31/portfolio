@@ -9,7 +9,6 @@ import { AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import {
   Select,
@@ -18,8 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
 import { createSkill, updateSkill } from '../actions'
-import { VALID_CATEGORIES, AVAILABLE_ICONS } from '../constants'
+import { VALID_CATEGORIES } from '../constants'
 import type { Database } from '@/types/database'
 
 type Skill = Database['public']['Tables']['skills']['Row']
@@ -104,42 +104,17 @@ export function SkillForm({ skill }: SkillFormProps) {
         )}
       </div>
 
-      {/* Context */}
-      <div className="space-y-1.5">
-        <Label htmlFor="context">Context *</Label>
-        <Textarea
-          id="context"
-          name="context"
-          rows={3}
-          defaultValue={skill?.context}
+      {/* Visibility */}
+      <div className="flex items-center gap-3">
+        <Checkbox
+          id="is_visible"
+          name="is_visible"
+          defaultChecked={skill ? skill.is_visible : true}
           disabled={isPending}
-          aria-invalid={!!state?.errors.context}
         />
-        {state?.errors.context && (
-          <p role="alert" className="text-destructive text-xs">
-            {state.errors.context}
-          </p>
-        )}
-      </div>
-
-      {/* Icon */}
-      <div className="space-y-1.5">
-        <Label htmlFor="icon">Icon (optional)</Label>
-        <Input
-          id="icon"
-          name="icon"
-          defaultValue={skill?.icon || ''}
-          disabled={isPending}
-          aria-invalid={!!state?.errors.icon}
-        />
-        <p className="text-muted-foreground text-xs leading-relaxed">
-          Available: {AVAILABLE_ICONS.join(', ')}
-        </p>
-        {state?.errors.icon && (
-          <p role="alert" className="text-destructive text-xs">
-            {state.errors.icon}
-          </p>
-        )}
+        <Label htmlFor="is_visible" className="cursor-pointer">
+          Visible on Portfolio
+        </Label>
       </div>
 
       {/* Actions */}

@@ -21,3 +21,8 @@
   - UI: Menggabungkan `NAV_ITEMS` dan `SOCIAL_LINKS` dalam satu baris, menambahkan efek wordmark besar "dhani" dengan CSS `mask-image` linear gradient agar memudar ke bawah.
   - Responsive: Ditambahkan styling kondisional pada wordmark (margin negatif dan line-height bertahap: `leading-[0.85]` di mobile dan `leading-[0.75]` di desktop) agar potongan (crop) terbawah teks tetap proporsional tanpa terpotong terlalu agresif di layar kecil.
   - Wiring: Komponen hanya di-render di halaman utama Landing page (`app/page.tsx`).
+- [9] Refactor Skills Schema & Admin Bug Fixes — selesai, tidak ada spec file (diskusi langsung)
+  Catatan:
+  - Database: Membuang kolom `icon` dan `context` dari tabel `skills` untuk efisiensi, menambahkan `is_visible` (toggle tampil/sembunyi), dan membatasi `category` menjadi 4 pilar (`languages`, `frontend`, `backend_infra`, `database`) menggunakan `CHECK CONSTRAINT`.
+  - Admin UI: `skills-form.tsx` menggunakan komponen `Checkbox` karena `Switch` belum ter-install. Form input `icon` & `context` dihapus. `skills/page.tsx` menampilkan status visibility alih-alih `icon`.
+  - Bugfix: Menyelesaikan isu _Hydration Mismatch_ pada `AdminSidebar` dengan menunda render ikon `Sun`/`Moon` hingga status komponen `mounted` aktif di _client_. Mengkoreksi inkonsistensi impor `framer-motion` menjadi `motion/react` mengikuti standar arsitektur proyek.

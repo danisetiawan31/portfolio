@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   LayoutDashboard,
   FolderKanban,
@@ -41,6 +41,12 @@ export function AdminSidebar() {
   const { theme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true)
+  }, [])
 
   function isActive(href: string): boolean {
     if (href === '/admin') return pathname === '/admin'
@@ -104,10 +110,14 @@ export function AdminSidebar() {
           className="flex w-full items-center justify-start gap-3 rounded-md px-3 py-2 text-sm text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
           aria-label="Toggle theme"
         >
-          {theme === 'dark' ? (
-            <Sun className="h-4 w-4 opacity-70" />
+          {mounted ? (
+            theme === 'dark' ? (
+              <Sun className="h-4 w-4 opacity-70" />
+            ) : (
+              <Moon className="h-4 w-4 opacity-70" />
+            )
           ) : (
-            <Moon className="h-4 w-4 opacity-70" />
+            <span className="h-4 w-4 opacity-70" />
           )}
           Toggle theme
         </Button>

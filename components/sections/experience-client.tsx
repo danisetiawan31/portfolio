@@ -128,7 +128,7 @@ function TimelineItem({
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
             )}
-            <span className="font-mono text-[12px] tracking-tight text-zinc-400 tabular-nums dark:text-zinc-500">
+            <span className="text-muted-foreground font-mono text-[14px] font-medium tracking-tight tabular-nums">
               {range}
             </span>
           </div>
@@ -136,7 +136,7 @@ function TimelineItem({
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl border border-zinc-200/80 bg-white/80 p-5 shadow-[0_2px_16px_rgba(0,0,0,0.05)] backdrop-blur-sm dark:border-zinc-800/60 dark:bg-zinc-900/60">
+        <div className="bg-card border-border rounded-2xl border p-5 shadow-[0_2px_16px_rgba(0,0,0,0.05)] backdrop-blur-sm">
           {/* Header: logo + role + company */}
           <div className="flex gap-4">
             <CompanyLogo company={experience.company} />
@@ -191,7 +191,7 @@ function TimelineItem({
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 py-20 text-center dark:border-zinc-800">
+    <div className="border-border flex flex-col items-center justify-center rounded-2xl border border-dashed py-20 text-center">
       <p className="text-sm text-zinc-400">
         No experience entries yet. Check back soon!
       </p>

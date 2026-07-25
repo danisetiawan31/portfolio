@@ -16,7 +16,7 @@ function CardContent({ project }: { project: Project }) {
       {/* Thumbnail */}
       <Link
         href={`/projects/${project.slug}`}
-        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900"
+        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800"
       >
         {project.thumbnail_url ? (
           <Image

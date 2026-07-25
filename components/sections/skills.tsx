@@ -3,7 +3,7 @@
 import { SectionContainer } from '@/components/common/section-container'
 import { SectionHeader } from '@/components/common/section-header'
 import { getPublicSkills } from '@/lib/supabase/queries/skills'
-import { SkillsMarquee } from './skills-marquee'
+import { SkillsGrid } from './skills-grid'
 
 // ─── Empty state ──────────────────────────────────────────────────────────────
 
@@ -25,14 +25,16 @@ export default async function SkillsSection() {
   return (
     <SectionContainer id="skills">
       <SectionHeader
-        title="Skills"
-        subtitle="Technologies and tools I use to build things."
+        title="Skills & Toolkit"
+        subtitle="Tools I reach for consistently, grouped by where they sit in the stack."
       />
 
       {skills.length === 0 ? (
         <EmptyState />
       ) : (
-        <SkillsMarquee skills={skills.map((s) => s.name)} />
+        <div className="mx-auto mt-12 w-full max-w-5xl">
+          <SkillsGrid skills={skills} />
+        </div>
       )}
     </SectionContainer>
   )

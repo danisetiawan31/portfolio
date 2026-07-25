@@ -21,10 +21,6 @@ function validateSkillForm(formData: FormData): ActionResult | null {
     errors.name = 'Name is required.'
   }
 
-  if (!formData.get('context')?.toString().trim()) {
-    errors.context = 'Context is required.'
-  }
-
   const category = formData.get('category')?.toString().trim() as CategoryType
   if (!category || !VALID_CATEGORIES.includes(category)) {
     errors.category = 'Valid category is required.'
@@ -56,14 +52,12 @@ export async function createSkill(
 
   const supabase = createServiceRoleClient()
 
-  const iconRaw = formData.get('icon')?.toString().trim()
-  const icon = iconRaw || null
+  const isVisible = formData.get('is_visible') === 'on'
 
   const { error } = await supabase.from('skills').insert({
     name: (formData.get('name') as string).trim(),
     category: (formData.get('category') as string).trim(),
-    context: (formData.get('context') as string).trim(),
-    icon,
+    is_visible: isVisible,
     display_order: 0,
   })
 
@@ -97,16 +91,14 @@ export async function updateSkill(
 
   const supabase = createServiceRoleClient()
 
-  const iconRaw = formData.get('icon')?.toString().trim()
-  const icon = iconRaw || null
+  const isVisible = formData.get('is_visible') === 'on'
 
   const { error } = await supabase
     .from('skills')
     .update({
       name: (formData.get('name') as string).trim(),
       category: (formData.get('category') as string).trim(),
-      context: (formData.get('context') as string).trim(),
-      icon,
+      is_visible: isVisible,
     })
     .eq('id', id)
 

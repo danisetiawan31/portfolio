@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Pencil } from 'lucide-react'
 import { createServiceRoleClient } from '@/lib/supabase/server'
-import { TechBadge } from '@/components/common/tech-badge'
 import { Button } from '@/components/ui/button'
 import {
   Table,
@@ -21,7 +20,7 @@ export default async function AdminSkillsPage() {
 
   const { data: skills, error } = await supabase
     .from('skills')
-    .select('id, name, category, icon, context')
+    .select('id, name, category, is_visible')
     .order('category', { ascending: true })
     .order('display_order', { ascending: true })
 
@@ -68,8 +67,7 @@ export default async function AdminSkillsPage() {
                   <TableHeader>
                     <TableRow>
                       <TableHead>Name</TableHead>
-                      <TableHead>Icon</TableHead>
-                      <TableHead>Context</TableHead>
+                      <TableHead>Visibility</TableHead>
                       <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -80,14 +78,15 @@ export default async function AdminSkillsPage() {
                           {skill.name}
                         </TableCell>
                         <TableCell>
-                          {skill.icon ? (
-                            <TechBadge label={skill.icon} size="md" />
+                          {skill.is_visible ? (
+                            <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                              Visible
+                            </span>
                           ) : (
-                            <span className="text-muted-foreground">—</span>
+                            <span className="text-muted-foreground text-sm">
+                              Hidden
+                            </span>
                           )}
-                        </TableCell>
-                        <TableCell className="max-w-[200px] truncate">
-                          {skill.context}
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-2">
