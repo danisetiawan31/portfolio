@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { ImageUploadInput } from '@/components/admin/image-upload-input'
 import { TagsSelector } from '@/components/ui/tags-selector'
 import { TECH_STACK_OPTIONS } from '@/lib/constants/tech-stack-options'
 import { createProject, updateProject } from '../actions'
@@ -173,26 +174,12 @@ export function ProjectForm({ project }: ProjectFormProps) {
             ? '(leave empty to keep current)'
             : '(optional)'}
         </Label>
-        {project?.thumbnail_url && (
-          <p className="text-muted-foreground text-xs">
-            Current:{' '}
-            <a
-              href={project.thumbnail_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              view
-            </a>
-          </p>
-        )}
-        <Input
+        <ImageUploadInput
           id="thumbnail"
           name="thumbnail"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
+          defaultValue={project?.thumbnail_url ?? ''}
           disabled={isPending}
-          aria-invalid={!!(thumbError ?? state?.errors.thumbnail)}
+          error={!!(thumbError ?? state?.errors.thumbnail)}
           onChange={handleThumbnailChange}
         />
         {(thumbError ?? state?.errors.thumbnail) && (

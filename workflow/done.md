@@ -26,3 +26,8 @@
   - Database: Membuang kolom `icon` dan `context` dari tabel `skills` untuk efisiensi, menambahkan `is_visible` (toggle tampil/sembunyi), dan membatasi `category` menjadi 4 pilar (`languages`, `frontend`, `backend_infra`, `database`) menggunakan `CHECK CONSTRAINT`.
   - Admin UI: `skills-form.tsx` menggunakan komponen `Checkbox` karena `Switch` belum ter-install. Form input `icon` & `context` dihapus. `skills/page.tsx` menampilkan status visibility alih-alih `icon`.
   - Bugfix: Menyelesaikan isu _Hydration Mismatch_ pada `AdminSidebar` dengan menunda render ikon `Sun`/`Moon` hingga status komponen `mounted` aktif di _client_. Mengkoreksi inkonsistensi impor `framer-motion` menjadi `motion/react` mengikuti standar arsitektur proyek.
+- [10] UI Polish & Admin Enhancements — selesai, tidak ada spec file (diskusi langsung)
+  Catatan:
+  - Global UI: Menambahkan efek _Click Spark_ secara global pada `app/layout.tsx`.
+  - Bugfix: Memperbaiki _bug_ kemunculan `Navbar` di halaman `/certificates` (karena _anchor links_ tidak berfungsi di luar halaman utama).
+  - Admin UI: Mengganti komponen _upload_ gambar standar pada `project-form.tsx` dan `certificate-form.tsx` dengan komponen `ImageUploadInput` (gaya Aceternity UI).

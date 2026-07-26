@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { ImageUploadInput } from '@/components/admin/image-upload-input'
 import { createCertificate, updateCertificate } from '../actions'
 import type { Database } from '@/types/database'
 
@@ -143,28 +144,14 @@ export function CertificateForm({ certificate }: CertificateFormProps) {
           Image{' '}
           {certificate?.image_url
             ? '(leave empty to keep current)'
-            : '(optional)'}
+            : '(required)'}
         </Label>
-        {certificate?.image_url && (
-          <p className="text-muted-foreground text-xs">
-            Current:{' '}
-            <a
-              href={certificate.image_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              view
-            </a>
-          </p>
-        )}
-        <Input
+        <ImageUploadInput
           id="image"
           name="image"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
+          defaultValue={certificate?.image_url ?? ''}
           disabled={isPending}
-          aria-invalid={!!(imageError ?? state?.errors?.image)}
+          error={!!(imageError ?? state?.errors?.image)}
           onChange={handleImageChange}
         />
         {(imageError ?? state?.errors?.image) && (

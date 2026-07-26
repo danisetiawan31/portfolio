@@ -8,7 +8,6 @@ import { CertificateCard } from '@/components/sections/certificate-card'
 import { FadeUpOnScroll } from '@/components/common/fade-up-on-scroll'
 import { SectionContainer } from '@/components/common/section-container'
 import { SectionHeader } from '@/components/common/section-header'
-import { Navbar } from '@/components/layout/navbar'
 
 export const metadata: Metadata = {
   title: 'Certificates | Portfolio',
@@ -27,7 +26,6 @@ export default async function CertificatesPage() {
 
   return (
     <>
-      <Navbar />
       <div className="pt-12">
         <SectionContainer id="all-certificates" className="!pt-0">
           <div className="mb-8">

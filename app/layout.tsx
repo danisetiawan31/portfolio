@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Providers } from '@/components/providers'
+import ClickSpark from '@/components/ui/click-spark'
 import './globals.css'
 
 const inter = Inter({
@@ -56,7 +57,15 @@ export default function RootLayout({
         </div>
 
         <Providers attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <ClickSpark
+            sparkColor="primary"
+            sparkSize={17}
+            sparkRadius={80}
+            sparkCount={8}
+            duration={800}
+          >
+            {children}
+          </ClickSpark>
         </Providers>
       </body>
     </html>
