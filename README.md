@@ -27,16 +27,16 @@ graph TD
     end
 
     subgraph NextServer ["Next.js 16 App Router Server"]
-        RSC["⚡ React Server Components (Public Pages)"]
-        ProxyGuard["🛡️ Middleware Proxy Guard (proxy.ts)"]
-        ServerActions["⚡ Server Actions (Mutations)"]
+        RSC["⚡ React Server Components - Public Pages"]
+        ProxyGuard["🛡️ Middleware Proxy Guard - proxy.ts"]
+        ServerActions["⚡ Server Actions - Mutations"]
         DataCache["📦 Next.js Data Cache"]
     end
 
     subgraph Backend ["Database & Storage Services"]
         SupaAuth["🔑 Supabase Auth"]
-        SupaDB[("🐘 Supabase PostgreSQL (RLS Enabled)")]
-        SupaStore["📁 Supabase Storage (Thumbnails / Certificates)"]
+        SupaDB[("🐘 Supabase PostgreSQL - RLS Enabled")]
+        SupaStore["📁 Supabase Storage - Thumbnails & Certificates"]
         ResendMail["✉️ Resend Email Service"]
     end
 
@@ -50,7 +50,7 @@ graph TD
     AdminUser -->|Submit Mutation Form| ServerActions
 
     ServerActions -->|Auth Guard Check| SupaAuth
-    ServerActions -->|Write Data (Bypass RLS)| SupaDB
+    ServerActions -->|Write Data - Bypass RLS| SupaDB
     ServerActions -->|Upload Assets| SupaStore
     ServerActions -->|Bust Stale Cache| DataCache
 
