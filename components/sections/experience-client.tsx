@@ -154,14 +154,24 @@ function TimelineItem({
           <div className="my-4 h-px bg-zinc-100 dark:bg-zinc-800" />
 
           {/* Description */}
-          {experience.description && (
+          {experience.description.length > 0 && (
             <div>
               <p className="mb-2.5 text-[12px] font-semibold tracking-widest text-violet-600 uppercase dark:text-violet-400">
                 Tanggung Jawab
               </p>
-              <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-                {experience.description}
-              </p>
+              <ul className="space-y-1.5">
+                {experience.description.map((bullet, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400"
+                  >
+                    <span className="mt-[3px] shrink-0 text-violet-400 dark:text-violet-500">
+                      •
+                    </span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 

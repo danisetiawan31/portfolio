@@ -3,6 +3,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 import { isRedirectError } from 'next/dist/client/components/redirect-error'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/supabase/auth-guard'
@@ -63,6 +64,9 @@ export async function createSkill(
 
   if (error) return { errors: { _form: error.message } }
 
+  revalidatePath('/admin/skills')
+  revalidatePath('/')
+
   try {
     redirect('/admin/skills')
   } catch (err) {
@@ -104,6 +108,9 @@ export async function updateSkill(
 
   if (error) return { errors: { _form: error.message } }
 
+  revalidatePath('/admin/skills')
+  revalidatePath('/')
+
   try {
     redirect('/admin/skills')
   } catch (err) {
@@ -118,6 +125,9 @@ export async function deleteSkill(id: string): Promise<void> {
   const supabase = createServiceRoleClient()
 
   await supabase.from('skills').delete().eq('id', id)
+
+  revalidatePath('/admin/skills')
+  revalidatePath('/')
 
   redirect('/admin/skills')
 }

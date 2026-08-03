@@ -17,8 +17,8 @@ const ICON_MAP: Record<string, string> = {
   php: '/icons/php.svg',
   java: '/icons/java.svg',
   dart: '/icons/dart.svg',
-  r: '/icons/R.svg',
-  html: '/icons/html.svg',
+  golang: '/icons/golang.svg',
+  go: '/icons/golang.svg',
   css: '/icons/css.svg',
 
   // Frontend
@@ -43,13 +43,17 @@ const ICON_MAP: Record<string, string> = {
   express: '/icons/express.svg',
   'express.js': '/icons/express.svg',
   expressjs: '/icons/express.svg',
+  nestjs: '/icons/nestjs.svg',
+  'nest.js': '/icons/nestjs.svg',
+  nest: '/icons/nestjs.svg',
   laravel: '/icons/laravel.svg',
   codeigniter: '/icons/codeigniter.svg',
+  jenkins: '/icons/jenkins.svg',
 
   // Databases
   mysql: '/icons/mysql.svg',
-  postgresql: '/icons/postgree.svg',
-  postgres: '/icons/postgree.svg',
+  postgresql: '/icons/postgresql.svg',
+  postgres: '/icons/postgresql.svg',
   mongodb: '/icons/mongodb.svg',
   firebase: '/icons/firebase.svg',
   supabase: '/icons/supabase.svg',
@@ -59,7 +63,6 @@ const ICON_MAP: Record<string, string> = {
   zod: '/icons/zod.svg',
   zustand: '/icons/zustand.svg',
   framermotion: '/icons/fm.svg',
-  'framer-motion': '/icons/fm.svg',
   framer: '/icons/fm.svg',
 
   // Tools
@@ -68,7 +71,7 @@ const ICON_MAP: Record<string, string> = {
   postman: '/icons/postman.svg',
   jira: '/icons/Jira.svg',
   vercel: '/icons/vercel.svg',
-  tableau: '/icons/tableau.svg',
+  docker: '/icons/docker.svg',
 }
 
 function normalise(name: string): string {

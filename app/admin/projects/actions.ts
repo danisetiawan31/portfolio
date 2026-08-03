@@ -3,6 +3,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/supabase/auth-guard'
 import { parseTechStack } from '@/lib/utils/parse-tech-stack'
@@ -152,6 +153,10 @@ export async function createProject(
 
   if (error) return { errors: { _form: error.message } }
 
+  revalidatePath('/admin/projects')
+  revalidatePath('/projects')
+  revalidatePath('/')
+
   redirect('/admin/projects')
 }
 
@@ -179,10 +184,10 @@ export async function updateProject(
   const slugResult = validateSlug(slugRaw)
   if ('error' in slugResult) return { errors: { slug: slugResult.error } }
 
-  // Fetch existing row to handle thumbnail replacement
+  // Fetch existing row to handle thumbnail replacement and slug change detection
   const { data: existing } = await supabase
     .from('projects')
-    .select('thumbnail_url')
+    .select('slug, thumbnail_url')
     .eq('id', id)
     .single()
 
@@ -220,6 +225,15 @@ export async function updateProject(
 
   if (error) return { errors: { _form: error.message } }
 
+  revalidatePath('/admin/projects')
+  revalidatePath('/projects')
+  revalidatePath('/')
+  revalidatePath(`/projects/${slugResult.slug}`)
+  // Jika slug berubah, bust cache halaman detail dengan slug lama
+  if (existing?.slug && existing.slug !== slugResult.slug) {
+    revalidatePath(`/projects/${existing.slug}`)
+  }
+
   redirect('/admin/projects')
 }
 
@@ -240,6 +254,10 @@ export async function deleteProject(id: string): Promise<void> {
   }
 
   await supabase.from('projects').delete().eq('id', id)
+
+  revalidatePath('/admin/projects')
+  revalidatePath('/projects')
+  revalidatePath('/')
 
   redirect('/admin/projects')
 }

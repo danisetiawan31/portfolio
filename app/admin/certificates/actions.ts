@@ -137,6 +137,7 @@ export async function createCertificate(
 
   revalidatePath('/admin/certificates')
   revalidatePath('/')
+  revalidatePath('/certificates')
   return { success: true }
 }
 
@@ -211,6 +212,7 @@ export async function updateCertificate(
 
   revalidatePath('/admin/certificates')
   revalidatePath('/')
+  revalidatePath('/certificates')
   return { success: true }
 }
 
@@ -230,6 +232,10 @@ export async function deleteCertificate(id: string): Promise<void> {
   }
 
   await supabase.from('certificates').delete().eq('id', id)
+
+  revalidatePath('/admin/certificates')
+  revalidatePath('/')
+  revalidatePath('/certificates')
 
   redirect('/admin/certificates')
 }

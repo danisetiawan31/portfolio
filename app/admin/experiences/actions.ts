@@ -3,6 +3,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 import { isRedirectError } from 'next/dist/client/components/redirect-error'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/supabase/auth-guard'
@@ -27,8 +28,12 @@ function validateExperienceForm(formData: FormData): ActionResult | null {
     errors.role = 'Role is required.'
   }
 
-  if (!formData.get('description')?.toString().trim()) {
-    errors.description = 'Description is required.'
+  const bullets = formData
+    .getAll('description')
+    .map((v) => v.toString().trim())
+    .filter(Boolean)
+  if (bullets.length === 0) {
+    errors.description = 'At least one bullet point is required.'
   }
 
   const type = formData.get('type')?.toString().trim() as ExperienceType
@@ -78,10 +83,15 @@ export async function createExperience(
   const endDateRaw = formData.get('end_date')?.toString().trim()
   const end_date = is_current ? null : endDateRaw || null
 
+  const description = formData
+    .getAll('description')
+    .map((v) => v.toString().trim())
+    .filter(Boolean)
+
   const { error } = await supabase.from('experiences').insert({
     company: (formData.get('company') as string).trim(),
     role: (formData.get('role') as string).trim(),
-    description: (formData.get('description') as string).trim(),
+    description,
     type: formData.get('type') as string,
     tech_stack: parseTechStack((formData.get('tech_stack') as string) || ''),
     start_date: formData.get('start_date') as string,
@@ -91,6 +101,9 @@ export async function createExperience(
   })
 
   if (error) return { errors: { _form: error.message } }
+
+  revalidatePath('/admin/experiences')
+  revalidatePath('/')
 
   try {
     redirect('/admin/experiences')
@@ -124,12 +137,17 @@ export async function updateExperience(
   const endDateRaw = formData.get('end_date')?.toString().trim()
   const end_date = is_current ? null : endDateRaw || null
 
+  const description = formData
+    .getAll('description')
+    .map((v) => v.toString().trim())
+    .filter(Boolean)
+
   const { error } = await supabase
     .from('experiences')
     .update({
       company: (formData.get('company') as string).trim(),
       role: (formData.get('role') as string).trim(),
-      description: (formData.get('description') as string).trim(),
+      description,
       type: formData.get('type') as string,
       tech_stack: parseTechStack((formData.get('tech_stack') as string) || ''),
       start_date: formData.get('start_date') as string,
@@ -139,6 +157,9 @@ export async function updateExperience(
     .eq('id', id)
 
   if (error) return { errors: { _form: error.message } }
+
+  revalidatePath('/admin/experiences')
+  revalidatePath('/')
 
   try {
     redirect('/admin/experiences')
@@ -154,6 +175,9 @@ export async function deleteExperience(id: string): Promise<void> {
   const supabase = createServiceRoleClient()
 
   await supabase.from('experiences').delete().eq('id', id)
+
+  revalidatePath('/admin/experiences')
+  revalidatePath('/')
 
   redirect('/admin/experiences')
 }

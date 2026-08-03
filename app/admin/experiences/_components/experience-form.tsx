@@ -9,9 +9,9 @@ import { AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { BulletListInput } from '@/components/admin/bullet-list-input'
 import { TagsSelector } from '@/components/ui/tags-selector'
 import { TECH_STACK_OPTIONS } from '@/lib/constants/tech-stack-options'
 import {
@@ -117,13 +117,10 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
       {/* Description */}
       <div className="space-y-1.5">
         <Label htmlFor="description">Description *</Label>
-        <Textarea
-          id="description"
+        <BulletListInput
           name="description"
-          rows={4}
-          defaultValue={experience?.description}
-          disabled={isPending}
-          aria-invalid={!!state?.errors.description}
+          defaultValue={experience?.description ?? []}
+          error={!!state?.errors.description}
         />
         {state?.errors.description && (
           <p role="alert" className="text-destructive text-xs">

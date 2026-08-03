@@ -254,7 +254,19 @@ export function ImageUploadInput({
                     </motion.p>
                   )}
 
-                  <div className="mt-auto flex justify-end pt-2">
+                  <div className="mt-auto flex justify-end gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        inputRef.current?.click()
+                      }}
+                      disabled={disabled}
+                      className="flex items-center gap-1 text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                    >
+                      <IconUpload className="h-4 w-4" />
+                      Change
+                    </button>
                     <button
                       type="button"
                       onClick={handleRemove}

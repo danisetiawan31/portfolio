@@ -31,3 +31,21 @@
   - Global UI: Menambahkan efek _Click Spark_ secara global pada `app/layout.tsx`.
   - Bugfix: Memperbaiki _bug_ kemunculan `Navbar` di halaman `/certificates` (karena _anchor links_ tidak berfungsi di luar halaman utama).
   - Admin UI: Mengganti komponen _upload_ gambar standar pada `project-form.tsx` dan `certificate-form.tsx` dengan komponen `ImageUploadInput` (gaya Aceternity UI).
+- [11] Bugfix: revalidatePath setelah mutasi project — selesai, tidak ada spec file (diskusi langsung)
+  Catatan:
+  - Root cause: `createProject`, `updateProject`, `deleteProject` di `app/admin/projects/actions.ts` memanggil `redirect()` tanpa `revalidatePath()` sebelumnya, sehingga Next.js Data Cache tidak di-invalidate dan project baru/update/delete tidak muncul di UI.
+  - Fix: tambah `revalidatePath()` SEBELUM setiap `redirect()` pada ketiga action.
+  - Path yang di-revalidate per action:
+    - `createProject`: `/admin/projects`, `/projects`, `/`
+    - `updateProject`: `/admin/projects`, `/projects`, `/`, `/projects/[slug]` (slug spesifik dari form)
+    - `deleteProject`: `/admin/projects`, `/projects`, `/`
+  - Sesuai konvensi baru AGENTS.md §Data mutation.
+- [12] Bugfix: revalidatePath di experiences, skills, certificates actions — selesai, tidak ada spec file
+  Catatan:
+  - Bug sama persis dengan [11]: semua action mutation di experiences dan skills tidak punya `revalidatePath()` sama sekali; certificates punya tapi incomplete.
+  - `experiences/actions.ts`: tambah `revalidatePath('/admin/experiences')` + `revalidatePath('/')` di `createExperience`, `updateExperience`, `deleteExperience` — sebelum `redirect()`.
+  - `skills/actions.ts`: tambah `revalidatePath('/admin/skills')` + `revalidatePath('/')` di `createSkill`, `updateSkill`, `deleteSkill` — sebelum `redirect()`.
+  - `certificates/actions.ts`: tambah `revalidatePath('/certificates')` ke `createCertificate` dan `updateCertificate` (sudah ada 2 path lain); lengkapi `deleteCertificate` yang kosong dengan ketiga path: `/admin/certificates`, `/`, `/certificates` — sebelum `redirect()`.
+  - Tidak ada field URL-based (slug) di ketiga modul ini — tidak perlu guard slug-lama.
+  - [13] Experience bullet points — selesai, spec: workflow/experience-bullets.md
+    Catatan: <isi penyimpangan dari spec kalau ada, atau "sesuai spec">

@@ -83,6 +83,15 @@ Flat, tidak pakai route group Next.js. `app/admin/...` langsung, homepage di `ap
   kebijakan ini.
 - "State sukses/positif pakai token --success, mengikuti pola pasangan --destructive.
 
+## Data mutation
+
+- Setiap Server Action yang create/update/delete data WAJIB memanggil
+  revalidatePath() (atau revalidateTag()) untuk SEMUA path yang menampilkan
+  data tersebut, SEBELUM redirect() atau return response sukses.
+- Kalau ada field yang dipakai sebagai bagian URL (misal slug), dan field
+  itu bisa diubah saat update: ambil nilai LAMA-nya sebelum mutation
+  dijalankan, lalu revalidate path lama DAN path baru kalau nilainya berubah.
+
 ## Update done.md
 
 \```
