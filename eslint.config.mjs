@@ -11,6 +11,8 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    '.gitnexus/**',
+    '.claude/**',
     // Generated file — do not lint, do not edit manually
     'types/database.ts',
   ]),
