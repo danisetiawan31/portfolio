@@ -75,7 +75,15 @@ function MovingBorderButton({
   )
 }
 
-export default function HeroClient({ projects }: { projects: Project[] }) {
+export default function HeroClient({
+  projects,
+  cvUrl,
+  cvFileName,
+}: {
+  projects: Project[]
+  cvUrl?: string | null
+  cvFileName?: string | null
+}) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -193,8 +201,10 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
             {/* Download CV — moving border wrapper */}
             <MovingBorderButton>
               <motion.a
-                href="/file/cv.pdf"
-                download
+                href={cvUrl || '/file/cv.pdf'}
+                download={cvFileName || 'CV_Ahmad_Dhani_Setiawan.pdf'}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -248,8 +258,9 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
                       <Image
                         src={logo.src}
                         alt={logo.alt}
-                        width={100}
-                        height={40}
+                        width={32}
+                        height={32}
+                        style={{ width: 'auto', height: '2rem' }}
                         className="mx-6 h-8 w-auto object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0 dark:opacity-50 dark:invert"
                       />
                     </MarqueeItem>
@@ -276,13 +287,14 @@ export default function HeroClient({ projects }: { projects: Project[] }) {
                   >
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="block h-full w-full"
+                      className="relative block h-full w-full"
                     >
                       {project.thumbnail_url ? (
                         <Image
                           src={project.thumbnail_url}
                           alt={project.title}
                           fill
+                          sizes="(max-width: 768px) 90vw, 40vw"
                           className="object-cover transition-transform duration-500 hover:scale-105"
                         />
                       ) : (

@@ -18,11 +18,21 @@ const SECTIONS = [
     description: 'Manage skills grouped by category.',
     href: '/admin/skills',
   },
+  {
+    title: 'Certificates',
+    description: 'Manage certifications and credentials.',
+    href: '/admin/certificates',
+  },
+  {
+    title: 'CV / Resume',
+    description: 'Upload and manage dynamic CV document for portfolio.',
+    href: '/admin/cv',
+  },
 ]
 
 export default function AdminDashboardPage() {
   return (
-    <div className="mx-auto max-w-4xl space-y-8 p-8">
+    <div className="mx-auto max-w-5xl space-y-8 p-8">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground mt-1 text-sm">
@@ -30,7 +40,7 @@ export default function AdminDashboardPage() {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SECTIONS.map(({ title, description, href }) => (
           <Link
             key={href}

@@ -51,3 +51,5 @@
   Catatan: sesuai spec.
 - [14] Testing Suite (Vitest & Playwright) — selesai, spec: workflow/testing-suite.md
   Catatan: Vitest terpasang untuk Unit Test (`lib/utils/parse-tech-stack.test.ts`, `lib/utils.test.ts`) dengan 7 passing tests. Playwright terpasang untuk E2E Test (`tests/e2e/home.spec.ts`, `tests/e2e/admin-auth.spec.ts`) dengan 5 passing tests.
+- [15] Dynamic CV Management — selesai, spec: workflow/dynamic-cv.md
+  Catatan: Sesuai spec. Single-row profile_settings di Supabase + Storage bucket documents (MIME PDF only, max 10MB). Admin CV management form di /admin/cv dengan auto-replace file lama saat file baru diunggah. Tombol Download CV di Hero Landing page mengambil URL aktif secara dinamis dengan fallback ke static /file/cv.pdf. Backend tested via Vitest (6 tests) & E2E tested via Playwright.

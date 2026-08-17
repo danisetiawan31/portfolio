@@ -33,7 +33,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col font-sans antialiased">
+      <body
+        className="flex min-h-full flex-col font-sans antialiased"
+        suppressHydrationWarning
+      >
         {/* ── Global ambient background ─────────────────────────────────────── */}
         <div
           aria-hidden
