@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { motion } from 'motion/react'
-import { IconUpload, IconX } from '@tabler/icons-react'
+import { Upload as IconUpload, X as IconX } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ImageLightbox } from '@/components/common/image-lightbox'
 
@@ -14,30 +14,6 @@ const mainVariant = {
 const secondaryVariant = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
-}
-
-export function GridPattern() {
-  const columns = 41
-  const rows = 11
-  return (
-    <div className="flex shrink-0 scale-105 flex-wrap items-center justify-center gap-x-px gap-y-px bg-gray-100 dark:bg-neutral-900">
-      {Array.from({ length: rows }).map((_, row) =>
-        Array.from({ length: columns }).map((_, col) => {
-          const index = row * columns + col
-          return (
-            <div
-              key={`${col}-${row}`}
-              className={`flex h-10 w-10 shrink-0 rounded-[2px] ${
-                index % 2 === 0
-                  ? 'bg-gray-50 dark:bg-neutral-950'
-                  : 'bg-gray-50 shadow-[0px_0px_1px_3px_rgba(255,255,255,1)_inset] dark:bg-neutral-950 dark:shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]'
-              }`}
-            />
-          )
-        }),
-      )}
-    </div>
-  )
 }
 
 interface ImageUploadInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -188,9 +164,10 @@ export function ImageUploadInput({
           className="hidden"
           {...props}
         />
-        <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
-          <GridPattern />
-        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] [background-size:16px_16px] dark:bg-[radial-gradient(#262626_1px,transparent_1px)]"
+        />
 
         <div className="flex flex-col items-center justify-center">
           <p className="relative z-20 font-sans text-base font-bold text-neutral-700 dark:text-neutral-300">

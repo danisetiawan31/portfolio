@@ -13,7 +13,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { DeleteCertificateButton } from './_components/delete-certificate-button'
+import { DeleteConfirmButton } from '@/components/admin/delete-confirm-button'
+import { deleteCertificate } from './actions'
 
 export default async function AdminCertificatesPage() {
   const supabase = createServiceRoleClient()
@@ -100,9 +101,10 @@ export default async function AdminCertificatesPage() {
                           Edit
                         </Link>
                       </Button>
-                      <DeleteCertificateButton
-                        id={cert.id}
-                        title={cert.title}
+                      <DeleteConfirmButton
+                        action={deleteCertificate.bind(null, cert.id)}
+                        label={cert.title}
+                        description={`This action cannot be undone. This will permanently delete the certificate "${cert.title}" and remove its image from storage.`}
                       />
                     </div>
                   </TableCell>

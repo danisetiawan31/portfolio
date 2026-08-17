@@ -1,6 +1,6 @@
 // components/sections/contact.tsx
 
-import { IconMail, IconMapPin } from '@tabler/icons-react'
+import { Mail as IconMail, MapPin as IconMapPin } from 'lucide-react'
 import { SectionContainer } from '@/components/common/section-container'
 import { SectionHeader } from '@/components/common/section-header'
 import { ContactForm } from '@/components/sections/contact-form'

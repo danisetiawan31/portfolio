@@ -7,7 +7,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 import {
   LayoutDashboard,
   FolderKanban,
@@ -40,15 +41,9 @@ const NAV_ITEMS: NavItem[] = [
 export function AdminSidebar() {
   const pathname = usePathname()
   const router = useRouter()
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true)
-  }, [])
 
   function isActive(href: string): boolean {
     if (href === '/admin') return pathname === '/admin'
@@ -63,7 +58,7 @@ export function AdminSidebar() {
   }
 
   function toggleTheme() {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
   const sidebarContent = (
@@ -88,12 +83,12 @@ export function AdminSidebar() {
               key={href}
               href={href}
               onClick={() => setMobileOpen(false)}
-              className={[
+              className={cn(
                 'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
                 active
                   ? 'bg-slate-700 text-white'
                   : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100',
-              ].join(' ')}
+              )}
               aria-current={active ? 'page' : undefined}
             >
               <Icon className="h-4 w-4 opacity-70" />
@@ -112,15 +107,8 @@ export function AdminSidebar() {
           className="flex w-full items-center justify-start gap-3 rounded-md px-3 py-2 text-sm text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
           aria-label="Toggle theme"
         >
-          {mounted ? (
-            theme === 'dark' ? (
-              <Sun className="h-4 w-4 opacity-70" />
-            ) : (
-              <Moon className="h-4 w-4 opacity-70" />
-            )
-          ) : (
-            <span className="h-4 w-4 opacity-70" />
-          )}
+          <Sun className="hidden h-4 w-4 opacity-70 dark:block" />
+          <Moon className="block h-4 w-4 opacity-70 dark:hidden" />
           Toggle theme
         </Button>
 

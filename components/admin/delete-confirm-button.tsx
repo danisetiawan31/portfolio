@@ -20,13 +20,13 @@ import {
 } from '@/components/ui/alert-dialog'
 
 interface DeleteConfirmButtonProps {
-  onDelete: () => Promise<void>
+  action: () => Promise<void>
   label: string
   description?: string
 }
 
 export function DeleteConfirmButton({
-  onDelete,
+  action,
   label,
   description = `This action cannot be undone. This will permanently delete "${label}".`,
 }: DeleteConfirmButtonProps) {
@@ -35,7 +35,7 @@ export function DeleteConfirmButton({
   async function handleDelete() {
     setIsDeleting(true)
     try {
-      await onDelete()
+      await action()
       toast.success('Deleted successfully')
     } catch (error) {
       if (isRedirectError(error)) return

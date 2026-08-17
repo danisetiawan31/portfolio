@@ -53,3 +53,9 @@
   Catatan: Vitest terpasang untuk Unit Test (`lib/utils/parse-tech-stack.test.ts`, `lib/utils.test.ts`) dengan 7 passing tests. Playwright terpasang untuk E2E Test (`tests/e2e/home.spec.ts`, `tests/e2e/admin-auth.spec.ts`) dengan 5 passing tests.
 - [15] Dynamic CV Management — selesai, spec: workflow/dynamic-cv.md
   Catatan: Sesuai spec. Single-row profile_settings di Supabase + Storage bucket documents (MIME PDF only, max 10MB). Admin CV management form di /admin/cv dengan auto-replace file lama saat file baru diunggah. Tombol Download CV di Hero Landing page mengambil URL aktif secara dinamis dengan fallback ke static /file/cv.pdf. Backend tested via Vitest (6 tests) & E2E tested via Playwright.
+- [16] Admin & UI Performance Optimization & Cleanup — selesai, tidak ada spec file (diskusi review)
+  Catatan:
+  - Form Upload: Menghapus loop GridPattern (451 elemen DOM <div>) pada ImageUploadInput dan menggantinya dengan 1 baris CSS dot pattern murni.
+  - Dependensi Ikon: Mengganti seluruh penggunaan @tabler/icons-react dengan lucide-react + SVG inline brand icons, lalu meng-uninstall package @tabler/icons-react.
+  - Sidebar Theme Toggle: Menghapus useState(mounted) dan useEffect di AdminSidebar, beralih ke pure CSS Tailwind toggle (hidden dark:block / block dark:hidden) untuk mencegah 2-pass client re-rendering.
+  - Delete Dialog: Menggunakan DeleteConfirmButton berbasis shadcn/ui AlertDialog (Radix UI) langsung dengan bound server actions pada semua tabel admin, dan menghapus 4 file wrapper boilerplate yang redundan.

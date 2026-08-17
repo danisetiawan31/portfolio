@@ -13,7 +13,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { DeleteExperienceButton } from './_components/delete-experience-button'
+import { DeleteConfirmButton } from '@/components/admin/delete-confirm-button'
+import { deleteExperience } from './actions'
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr)
@@ -94,9 +95,10 @@ export default async function AdminExperiencesPage() {
                       </Button>
 
                       {/* Delete */}
-                      <DeleteExperienceButton
-                        id={exp.id}
-                        company={exp.company}
+                      <DeleteConfirmButton
+                        action={deleteExperience.bind(null, exp.id)}
+                        label={exp.company}
+                        description={`This action cannot be undone. This will permanently delete the experience at "${exp.company}".`}
                       />
                     </div>
                   </TableCell>

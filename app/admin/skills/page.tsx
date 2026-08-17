@@ -12,7 +12,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { DeleteSkillButton } from './_components/delete-skill-button'
+import { DeleteConfirmButton } from '@/components/admin/delete-confirm-button'
+import { deleteSkill } from './actions'
 import { VALID_CATEGORIES } from './constants'
 
 export default async function AdminSkillsPage() {
@@ -98,9 +99,10 @@ export default async function AdminSkillsPage() {
                             </Button>
 
                             {/* Delete */}
-                            <DeleteSkillButton
-                              id={skill.id}
-                              name={skill.name}
+                            <DeleteConfirmButton
+                              action={deleteSkill.bind(null, skill.id)}
+                              label={skill.name}
+                              description={`This action cannot be undone. This will permanently delete the skill "${skill.name}".`}
                             />
                           </div>
                         </TableCell>

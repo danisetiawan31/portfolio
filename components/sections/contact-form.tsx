@@ -3,7 +3,7 @@
 // components/sections/contact-form.tsx
 
 import { useState, FormEvent } from 'react'
-import { IconLoader2, IconCheck } from '@tabler/icons-react'
+import { Loader2 as IconLoader2, Check as IconCheck } from 'lucide-react'
 
 type FormState = {
   name: string

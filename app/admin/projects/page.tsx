@@ -14,7 +14,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { DeleteProjectButton } from './_components/delete-project-button'
+import { DeleteConfirmButton } from '@/components/admin/delete-confirm-button'
+import { deleteProject } from './actions'
 
 export default async function AdminProjectsPage() {
   const supabase = createServiceRoleClient()
@@ -113,9 +114,10 @@ export default async function AdminProjectsPage() {
                       </Button>
 
                       {/* Delete */}
-                      <DeleteProjectButton
-                        id={project.id}
-                        title={project.title}
+                      <DeleteConfirmButton
+                        action={deleteProject.bind(null, project.id)}
+                        label={project.title}
+                        description={`This action cannot be undone. This will permanently delete the project "${project.title}" and remove its thumbnail from storage.`}
                       />
                     </div>
                   </TableCell>

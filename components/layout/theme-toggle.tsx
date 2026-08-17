@@ -4,7 +4,7 @@
 
 import { useMounted } from '@/lib/hooks/use-mounted'
 import { useTheme } from 'next-themes'
-import { IconMoon, IconSun } from '@tabler/icons-react'
+import { Moon as IconMoon, Sun as IconSun } from 'lucide-react'
 
 export const ThemeToggle = () => {
   const mounted = useMounted()
