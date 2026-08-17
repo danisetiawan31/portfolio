@@ -99,6 +99,30 @@ export type Database = {
         }
         Relationships: []
       }
+      profile_settings: {
+        Row: {
+          created_at: string
+          cv_file_name: string | null
+          cv_url: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cv_file_name?: string | null
+          cv_url?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cv_file_name?: string | null
+          cv_url?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           created_at: string
