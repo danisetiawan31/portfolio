@@ -47,5 +47,7 @@
   - `skills/actions.ts`: tambah `revalidatePath('/admin/skills')` + `revalidatePath('/')` di `createSkill`, `updateSkill`, `deleteSkill` — sebelum `redirect()`.
   - `certificates/actions.ts`: tambah `revalidatePath('/certificates')` ke `createCertificate` dan `updateCertificate` (sudah ada 2 path lain); lengkapi `deleteCertificate` yang kosong dengan ketiga path: `/admin/certificates`, `/`, `/certificates` — sebelum `redirect()`.
   - Tidak ada field URL-based (slug) di ketiga modul ini — tidak perlu guard slug-lama.
-  - [13] Experience bullet points — selesai, spec: workflow/experience-bullets.md
-    Catatan: <isi penyimpangan dari spec kalau ada, atau "sesuai spec">
+- [13] Experience bullet points — selesai, spec: workflow/experience-bullets.md
+  Catatan: sesuai spec.
+- [14] Testing Suite (Vitest & Playwright) — selesai, spec: workflow/testing-suite.md
+  Catatan: Vitest terpasang untuk Unit Test (`lib/utils/parse-tech-stack.test.ts`, `lib/utils.test.ts`) dengan 7 passing tests. Playwright terpasang untuk E2E Test (`tests/e2e/home.spec.ts`, `tests/e2e/admin-auth.spec.ts`) dengan 5 passing tests.
