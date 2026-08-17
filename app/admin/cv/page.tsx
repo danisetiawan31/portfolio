@@ -7,7 +7,7 @@ export default async function AdminCVPage() {
   const profileSettings = await getProfileSettings()
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6 p-8">
+    <div className="mx-auto max-w-3xl space-y-6 p-4 sm:p-6 md:p-8">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">
           CV / Resume Management

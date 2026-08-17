@@ -170,10 +170,10 @@ export function ImageUploadInput({
         />
 
         <div className="flex flex-col items-center justify-center">
-          <p className="relative z-20 font-sans text-base font-bold text-neutral-700 dark:text-neutral-300">
+          <p className="relative z-10 font-sans text-base font-bold text-neutral-700 dark:text-neutral-300">
             Upload Image
           </p>
-          <p className="relative z-20 mt-2 text-center font-sans text-base font-normal text-neutral-400 dark:text-neutral-400">
+          <p className="relative z-10 mt-2 text-center font-sans text-base font-normal text-neutral-400 dark:text-neutral-400">
             Drag or drop your image here or click to upload
           </p>
 
@@ -182,7 +182,7 @@ export function ImageUploadInput({
               <motion.div
                 layoutId="file-upload"
                 className={cn(
-                  'border-border relative z-40 mx-auto flex w-full flex-col items-center justify-start gap-6 overflow-hidden rounded-md border bg-white p-4 shadow-sm sm:flex-row sm:items-start dark:bg-neutral-900',
+                  'border-border relative z-10 mx-auto flex w-full flex-col items-center justify-start gap-6 overflow-hidden rounded-md border bg-white p-4 shadow-sm sm:flex-row sm:items-start dark:bg-neutral-900',
                 )}
                 onClick={(e) => e.stopPropagation()} // Prevent clicking card from opening file dialog again
               >
@@ -267,7 +267,7 @@ export function ImageUploadInput({
                     damping: 20,
                   }}
                   className={cn(
-                    'relative z-40 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md bg-white shadow-[0px_10px_50px_rgba(0,0,0,0.1)] transition-colors group-hover/file:shadow-2xl dark:bg-neutral-900',
+                    'relative z-10 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md bg-white shadow-[0px_10px_50px_rgba(0,0,0,0.1)] transition-colors group-hover/file:shadow-2xl dark:bg-neutral-900',
                     isDragging ? 'border-primary border' : '',
                   )}
                 >
@@ -287,7 +287,7 @@ export function ImageUploadInput({
 
                 <motion.div
                   variants={secondaryVariant}
-                  className="border-primary absolute inset-0 z-30 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md border border-dashed bg-transparent opacity-0"
+                  className="border-primary absolute inset-0 z-0 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md border border-dashed bg-transparent opacity-0"
                 />
               </>
             )}

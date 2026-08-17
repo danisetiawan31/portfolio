@@ -59,3 +59,9 @@
   - Dependensi Ikon: Mengganti seluruh penggunaan @tabler/icons-react dengan lucide-react + SVG inline brand icons, lalu meng-uninstall package @tabler/icons-react.
   - Sidebar Theme Toggle: Menghapus useState(mounted) dan useEffect di AdminSidebar, beralih ke pure CSS Tailwind toggle (hidden dark:block / block dark:hidden) untuk mencegah 2-pass client re-rendering.
   - Delete Dialog: Menggunakan DeleteConfirmButton berbasis shadcn/ui AlertDialog (Radix UI) langsung dengan bound server actions pada semua tabel admin, dan menghapus 4 file wrapper boilerplate yang redundan.
+- [17] Admin Mobile-Friendly Layout & Drawer Z-Index Bugfix — selesai, tidak ada spec file
+  Catatan:
+  - Layout & Padding: Mengubah padding admin dari fixed p-8 ke responsif p-4 sm:p-6 md:p-8 agar ruang kerja di HP lebih luas.
+  - Responsive List View: Mengimplementasikan Card List View khusus mobile (< md) di seluruh tabel admin (Projects, Certificates, Experiences, Skills) dengan touch target tombol aksi yang ergonomis.
+  - Live Dashboard Metrics: Menambahkan counter badge live (Projects, Experiences, Skills, Certificates, CV Status) di halaman /admin.
+  - Fix Bug Z-Index: Menaikkan layer mobile drawer dan backdrop AdminSidebar ke z-50 dan menurunkan z-index internal ImageUploadInput ke z-10 / z-0 agar card upload tidak menembus drawer mobile.

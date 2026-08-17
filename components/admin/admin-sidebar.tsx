@@ -159,10 +159,10 @@ export function AdminSidebar() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 z-30 bg-black/50 md:hidden"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs md:hidden"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 z-40 w-60 md:hidden">
+          <div className="fixed inset-y-0 left-0 z-50 w-60 md:hidden">
             {sidebarContent}
           </div>
         </>
