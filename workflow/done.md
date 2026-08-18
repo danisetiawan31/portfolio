@@ -79,3 +79,11 @@
   - Rate Limiting: Membuat `lib/ai/ratelimit.ts` menggunakan `@upstash/ratelimit` (10 request/10 menit per IP) dengan sliding window in-memory fallback.
   - Route Handler: Membuat `app/api/ai/route.ts` dengan Vercel AI SDK `streamText` & `toTextStreamResponse`.
   - Testing: Unit test lengkap di `lib/ai/ratelimit.test.ts`, `lib/ai/context.test.ts`, dan `app/api/ai/route.test.ts` (23/23 tests passing) serta live test HTTP POST berhasil.
+- [20] AI Assistant (Tahap 3: Frontend Chatbot Floating Widget & Full E2E Test Suite) — selesai, spec: implementation_plan.md
+  Catatan:
+  - Custom Streaming Hook: Membuat `components/ai/use-ai-chat.ts` dengan controller abort dan error handling terisolasi.
+  - Floating Launcher & Modal Dialog: Membuat `components/ai/chat-widget.tsx` dengan animasi spring Framer Motion, status pulse online, tombol clear chat, dan auto-scroll message body.
+  - Quick Prompts: Membuat `components/ai/quick-prompts.tsx` dengan 4 saran pertanyaan instan seputar tech stack, project unggulan, pengalaman kerja, dan kontak.
+  - Message Bubbles & Markdown: Membuat `components/ai/chat-message-item.tsx` dengan rendering bold/list/code, streaming indicator, dan tombol salin respons.
+  - Integrasi: Memasang `ChatWidget` pada `app/page.tsx`.
+  - Test Suite: Menambahkan E2E test `tests/e2e/ai-chat.spec.ts` dan `tests/e2e/admin-ai.spec.ts` (seluruh 9/9 Playwright E2E tests & 23/23 Vitest tests lulus 100%).

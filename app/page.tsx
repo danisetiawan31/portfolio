@@ -6,6 +6,7 @@ import ExperiencesSection from '@/components/sections/experiences'
 import SkillsSection from '@/components/sections/skills'
 import CertificatesSection from '@/components/sections/certificates'
 import ContactSection from '@/components/sections/contact'
+import { ChatWidget } from '@/components/ai/chat-widget'
 import Footer from '@/components/layout/footer'
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <CertificatesSection />
         <ContactSection />
       </main>
+      <ChatWidget />
       <Footer />
     </>
   )
