@@ -101,24 +101,36 @@ export type Database = {
       }
       profile_settings: {
         Row: {
+          ai_model: string | null
           created_at: string
+          custom_instructions: string | null
           cv_file_name: string | null
+          cv_text_content: string | null
           cv_url: string | null
           id: string
+          openrouter_api_key: string | null
           updated_at: string
         }
         Insert: {
+          ai_model?: string | null
           created_at?: string
+          custom_instructions?: string | null
           cv_file_name?: string | null
+          cv_text_content?: string | null
           cv_url?: string | null
           id?: string
+          openrouter_api_key?: string | null
           updated_at?: string
         }
         Update: {
+          ai_model?: string | null
           created_at?: string
+          custom_instructions?: string | null
           cv_file_name?: string | null
+          cv_text_content?: string | null
           cv_url?: string | null
           id?: string
+          openrouter_api_key?: string | null
           updated_at?: string
         }
         Relationships: []

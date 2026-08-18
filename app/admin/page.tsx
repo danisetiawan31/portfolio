@@ -6,6 +6,7 @@ import {
   Wrench,
   Award,
   FileText,
+  Bot,
   ArrowRight,
 } from 'lucide-react'
 
@@ -25,7 +26,7 @@ export default async function AdminDashboardPage() {
     supabase.from('certificates').select('*', { count: 'exact', head: true }),
     supabase
       .from('profile_settings')
-      .select('cv_url, updated_at')
+      .select('cv_url, openrouter_api_key, ai_model, updated_at')
       .eq('id', 'singleton')
       .maybeSingle(),
   ])
@@ -65,6 +66,14 @@ export default async function AdminDashboardPage() {
       description: 'Upload and manage dynamic CV document for portfolio.',
       href: '/admin/cv',
       icon: FileText,
+    },
+    {
+      title: 'AI Assistant',
+      count: profileSettings?.openrouter_api_key ? 'Ready' : 'Setup Key',
+      description:
+        'Configure OpenRouter API key, models, and CV knowledge base.',
+      href: '/admin/ai',
+      icon: Bot,
     },
   ]
 

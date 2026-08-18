@@ -21,6 +21,7 @@ import {
   X,
   Award,
   FileText,
+  Bot,
 } from 'lucide-react'
 
 interface NavItem {
@@ -36,6 +37,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Skills', href: '/admin/skills', icon: Wrench },
   { label: 'Certificates', href: '/admin/certificates', icon: Award },
   { label: 'CV / Resume', href: '/admin/cv', icon: FileText },
+  { label: 'AI Assistant', href: '/admin/ai', icon: Bot },
 ]
 
 export function AdminSidebar() {

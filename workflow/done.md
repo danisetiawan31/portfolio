@@ -65,3 +65,10 @@
   - Responsive List View: Mengimplementasikan Card List View khusus mobile (< md) di seluruh tabel admin (Projects, Certificates, Experiences, Skills) dengan touch target tombol aksi yang ergonomis.
   - Live Dashboard Metrics: Menambahkan counter badge live (Projects, Experiences, Skills, Certificates, CV Status) di halaman /admin.
   - Fix Bug Z-Index: Menaikkan layer mobile drawer dan backdrop AdminSidebar ke z-50 dan menurunkan z-index internal ImageUploadInput ke z-10 / z-0 agar card upload tidak menembus drawer mobile.
+- [18] AI Assistant (Tahap 1: Skema DB, Parser PDF CV, & Admin AI Settings) — selesai, spec: implementation_plan.md
+  Catatan:
+  - Package: Memasang `ai`, `@ai-sdk/openai`, `@upstash/ratelimit`, `@upstash/redis`, `unpdf`.
+  - Database: Migrasi `supabase/schema/07_ai_settings.sql` menambahkan kolom `openrouter_api_key`, `ai_model`, `cv_text_content`, `custom_instructions` pada tabel `profile_settings`.
+  - Parser PDF: Membuat `lib/ai/pdf-parser.ts` menggunakan `unpdf` dan mengintegrasikannya ke `uploadCVAction` agar mengekstrak teks CV secara otomatis setiap kali PDF diunggah.
+  - Admin CMS: Halaman `/admin/ai` dan form `AISettingsForm` untuk mengelola API key dinamis, memilih model OpenRouter (default `nvidia/nemotron-3.5-lightning:free`), mengedit teks CV, dan kustomisasi instruksi persona AI.
+  - Test Suite: Menambahkan unit test `app/admin/ai/actions.test.ts` (16/16 tests passing).

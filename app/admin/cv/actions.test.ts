@@ -14,6 +14,10 @@ vi.mock('@/lib/supabase/server', () => ({
   createServiceRoleClient: vi.fn(),
 }))
 
+vi.mock('@/lib/ai/pdf-parser', () => ({
+  extractTextFromPDF: vi.fn().mockResolvedValue('Mocked CV text content'),
+}))
+
 import { requireAuth } from '@/lib/supabase/auth-guard'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 

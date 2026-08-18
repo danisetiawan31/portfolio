@@ -5,6 +5,7 @@
 import { revalidatePath } from 'next/cache'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/supabase/auth-guard'
+import { extractTextFromPDF } from '@/lib/ai/pdf-parser'
 import { CV_BUCKET, CV_ALLOWED_MIME, CV_MAX_BYTES } from './constants'
 
 export type ActionResult = {
@@ -78,13 +79,23 @@ export async function uploadCVAction(
       .getPublicUrl(path)
     const newCvUrl = publicUrlData.publicUrl
 
-    // 4. Upsert singleton profile_settings row
+    // 4. Extract PDF text content for AI Assistant knowledge base
+    let cvTextContent: string | null = null
+    try {
+      const buffer = await file.arrayBuffer()
+      cvTextContent = await extractTextFromPDF(buffer)
+    } catch {
+      // Non-fatal — continue even if text parsing fails
+    }
+
+    // 5. Upsert singleton profile_settings row
     const { error: dbError } = await supabaseAdmin
       .from('profile_settings')
       .upsert({
         id: 'singleton',
         cv_url: newCvUrl,
         cv_file_name: file.name,
+        cv_text_content: cvTextContent,
         updated_at: new Date().toISOString(),
       })
 
@@ -92,8 +103,9 @@ export async function uploadCVAction(
       return { errors: { root: dbError.message } }
     }
 
-    // 5. Revalidate cache for admin and public pages
+    // 6. Revalidate cache for admin and public pages
     revalidatePath('/admin')
+    revalidatePath('/admin/ai')
     revalidatePath('/')
 
     return {
@@ -132,6 +144,7 @@ export async function deleteCVAction(): Promise<ActionResult> {
         id: 'singleton',
         cv_url: null,
         cv_file_name: null,
+        cv_text_content: null,
         updated_at: new Date().toISOString(),
       })
 
@@ -140,6 +153,7 @@ export async function deleteCVAction(): Promise<ActionResult> {
     }
 
     revalidatePath('/admin')
+    revalidatePath('/admin/ai')
     revalidatePath('/')
 
     return {
