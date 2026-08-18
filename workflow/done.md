@@ -93,3 +93,8 @@
   - Stacking Context & Layer Fix: Menaikkan z-index widget ke `z-[6000]` dengan `pointer-events-auto` dan menambahkan hook `useMounted()` untuk memastikan tombol selalu muncul di atas semua layer dan stabil saat berganti mode device mobile di Chrome DevTools.
   - Penempatan Global: Memindahkan `ChatWidget` ke `app/layout.tsx` (aktif di seluruh halaman publik, otomatis di-exclude di `/admin/*`).
   - Test Suite: Menambahkan pengujian Playwright E2E khusus mobile viewport 375x667 dan desktop (10/10 tests passing).
+- [22] Web Rendering & GPU Performance Optimization — selesai, tidak ada spec file (audit performa)
+  Catatan:
+  - ClickSpark On-Demand Animation: Mengubah infinite loop requestAnimationFrame 60-120 FPS pada `components/ui/click-spark.tsx` menjadi on-demand loop yang hanya aktif 400ms saat user klik, menurunkan penggunaan CPU saat idle menjadi 0%.
+  - Background Ambient Optimization: Mengganti filter CSS `blur-[140px]` fixed pada `app/layout.tsx` dengan CSS `radial-gradient` murni untuk mengeliminasi beban rasterization GPU saat scroll.
+  - Hero Image Preloading: Menambahkan atribut `priority={idx === 0}` pada kartu thumbnail proyek teratas di `components/sections/hero-client.tsx` untuk mempercepat LCP.

@@ -43,12 +43,12 @@ export default function RootLayout({
           aria-hidden
           className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
         >
-          {/* Glow — top left */}
-          <div className="absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full bg-violet-500/[0.06] blur-[140px] dark:bg-violet-400/[0.09]" />
+          {/* Glow — top left (pure radial-gradient, 0 blur GPU overhead) */}
+          <div className="absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.07)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(167,139,250,0.11)_0%,transparent_70%)]" />
           {/* Glow — bottom right */}
-          <div className="absolute -right-20 -bottom-24 h-[500px] w-[500px] rounded-full bg-indigo-500/[0.05] blur-[120px] dark:bg-indigo-400/[0.08]" />
+          <div className="absolute -right-20 -bottom-24 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.06)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(129,140,248,0.09)_0%,transparent_70%)]" />
           {/* Glow — center faint */}
-          <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-400/[0.03] blur-[100px] dark:bg-slate-300/[0.03]" />
+          <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(148,163,184,0.03)_0%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(203,213,225,0.04)_0%,transparent_70%)]" />
           {/* Subtle grid */}
           <div
             className="absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"

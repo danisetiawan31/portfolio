@@ -294,6 +294,7 @@ export default function HeroClient({
                           src={project.thumbnail_url}
                           alt={project.title}
                           fill
+                          priority={idx === 0}
                           sizes="(max-width: 768px) 90vw, 40vw"
                           className="object-cover transition-transform duration-500 hover:scale-105"
                         />

@@ -1,3 +1,4 @@
+// components/ui/click-spark.tsx
 'use client'
 
 import React, { useRef, useEffect, useCallback } from 'react'
@@ -22,7 +23,7 @@ interface Spark {
 }
 
 const ClickSpark: React.FC<ClickSparkProps> = ({
-  sparkColor = '#a855f7', // Using a default purple to match the portfolio's violet theme, works well on both light/dark
+  sparkColor = '#a855f7',
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 8,
@@ -33,8 +34,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sparksRef = useRef<Spark[]>([])
-  const startTimeRef = useRef<number | null>(null)
+  const animationIdRef = useRef<number | null>(null)
+  const isAnimatingRef = useRef<boolean>(false)
+  const drawLoopRef = useRef<((timestamp: number) => void) | null>(null)
 
+  // Resize canvas to match parent dimensions
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -84,19 +88,22 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     [easing],
   )
 
+  // Keep draw logic updated with latest props without re-triggering unnecessary renders
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    let animationId: number
-
-    const draw = (timestamp: number) => {
-      if (!startTimeRef.current) {
-        startTimeRef.current = timestamp
+    drawLoopRef.current = (timestamp: number) => {
+      const canvas = canvasRef.current
+      if (!canvas) {
+        isAnimatingRef.current = false
+        return
       }
-      ctx?.clearRect(0, 0, canvas.width, canvas.height)
+
+      const ctx = canvas.getContext('2d')
+      if (!ctx) {
+        isAnimatingRef.current = false
+        return
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       sparksRef.current = sparksRef.current.filter((spark: Spark) => {
         const elapsed = timestamp - spark.startTime
@@ -125,34 +132,43 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         return true
       })
 
-      animationId = requestAnimationFrame(draw)
+      // If sparks remain, schedule next frame; otherwise, stop the loop and sleep
+      if (sparksRef.current.length > 0 && drawLoopRef.current) {
+        animationIdRef.current = requestAnimationFrame(drawLoopRef.current)
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        isAnimatingRef.current = false
+        animationIdRef.current = null
+      }
     }
+  }, [duration, easeFunc, extraScale, sparkRadius, sparkSize])
 
-    animationId = requestAnimationFrame(draw)
+  const startAnimation = useCallback(() => {
+    if (!isAnimatingRef.current && drawLoopRef.current) {
+      isAnimatingRef.current = true
+      animationIdRef.current = requestAnimationFrame(drawLoopRef.current)
+    }
+  }, [])
 
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
-      cancelAnimationFrame(animationId)
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current)
+      }
     }
-  }, [
-    sparkColor,
-    sparkSize,
-    sparkRadius,
-    sparkCount,
-    duration,
-    easeFunc,
-    extraScale,
-  ])
+  }, [])
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+  const addSparksAt = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current
     if (!canvas) return
     const rect = canvas.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const x = clientX - rect.left
+    const y = clientY - rect.top
 
     const now = performance.now()
 
-    // Resolve dynamic theme colors (like 'primary', 'secondary', or 'var(--primary)')
+    // Resolve dynamic theme colors
     let resolvedColor = sparkColor
     if (sparkColor.startsWith('var(')) {
       const varName = sparkColor.match(/var\(([^)]+)\)/)?.[1]
@@ -189,6 +205,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     }))
 
     sparksRef.current.push(...newSparks)
+    startAnimation()
+  }
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+    addSparksAt(e.clientX, e.clientY)
   }
 
   return (
