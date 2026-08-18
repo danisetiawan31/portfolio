@@ -72,3 +72,10 @@
   - Parser PDF: Membuat `lib/ai/pdf-parser.ts` menggunakan `unpdf` dan mengintegrasikannya ke `uploadCVAction` agar mengekstrak teks CV secara otomatis setiap kali PDF diunggah.
   - Admin CMS: Halaman `/admin/ai` dan form `AISettingsForm` untuk mengelola API key dinamis, memilih model OpenRouter (default `nvidia/nemotron-3.5-lightning:free`), mengedit teks CV, dan kustomisasi instruksi persona AI.
   - Test Suite: Menambahkan unit test `app/admin/ai/actions.test.ts` (16/16 tests passing).
+- [19] AI Assistant (Tahap 2: Backend Route Handler /api/ai, Context Builder, & Rate Limiter) — selesai, spec: implementation_plan.md
+  Catatan:
+  - OpenRouter Client: Membuat `lib/ai/openrouter.ts` dengan resolusi API key dinamis (Database -> .env.local fallback) dan model `nvidia/nemotron-3.5-lightning:free`.
+  - Context Builder: Membuat `lib/ai/context.ts` untuk mengagregasikan data Projects, Experiences, Skills, Certificates, CV text, dan persona instructions ke dalam System Prompt.
+  - Rate Limiting: Membuat `lib/ai/ratelimit.ts` menggunakan `@upstash/ratelimit` (10 request/10 menit per IP) dengan sliding window in-memory fallback.
+  - Route Handler: Membuat `app/api/ai/route.ts` dengan Vercel AI SDK `streamText` & `toTextStreamResponse`.
+  - Testing: Unit test lengkap di `lib/ai/ratelimit.test.ts`, `lib/ai/context.test.ts`, dan `app/api/ai/route.test.ts` (23/23 tests passing) serta live test HTTP POST berhasil.
