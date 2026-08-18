@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Providers } from '@/components/providers'
 import ClickSpark from '@/components/ui/click-spark'
+import { ChatWidget } from '@/components/ai/chat-widget'
 import './globals.css'
 
 const inter = Inter({
@@ -69,6 +70,7 @@ export default function RootLayout({
           >
             {children}
           </ClickSpark>
+          <ChatWidget />
         </Providers>
       </body>
     </html>

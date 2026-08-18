@@ -87,3 +87,9 @@
   - Message Bubbles & Markdown: Membuat `components/ai/chat-message-item.tsx` dengan rendering bold/list/code, streaming indicator, dan tombol salin respons.
   - Integrasi: Memasang `ChatWidget` pada `app/page.tsx`.
   - Test Suite: Menambahkan E2E test `tests/e2e/ai-chat.spec.ts` dan `tests/e2e/admin-ai.spec.ts` (seluruh 9/9 Playwright E2E tests & 23/23 Vitest tests lulus 100%).
+- [21] AI Assistant Minimalist UI & Mobile Device Mode Optimization — selesai, tidak ada spec file (feedback visual)
+  Catatan:
+  - Minimalist Trigger: Menghapus label teks "Tanya AI" pada tombol melayang, menggantinya dengan lingkaran minimalis (`size-12 sm:size-13 rounded-full`) berikon Bot dengan indikator dot online berkedip.
+  - Stacking Context & Layer Fix: Menaikkan z-index widget ke `z-[6000]` dengan `pointer-events-auto` dan menambahkan hook `useMounted()` untuk memastikan tombol selalu muncul di atas semua layer dan stabil saat berganti mode device mobile di Chrome DevTools.
+  - Penempatan Global: Memindahkan `ChatWidget` ke `app/layout.tsx` (aktif di seluruh halaman publik, otomatis di-exclude di `/admin/*`).
+  - Test Suite: Menambahkan pengujian Playwright E2E khusus mobile viewport 375x667 dan desktop (10/10 tests passing).
