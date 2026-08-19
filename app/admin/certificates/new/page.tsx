@@ -6,7 +6,7 @@ import { CertificateForm } from '../_components/certificate-form'
 
 export default function NewCertificatePage() {
   return (
-    <div className="mx-auto max-w-2xl space-y-6 p-8">
+    <div className="mx-auto max-w-2xl space-y-6 p-4 sm:p-6 md:p-8">
       <div>
         <Link
           href="/admin/certificates"

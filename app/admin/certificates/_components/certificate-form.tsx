@@ -188,16 +188,25 @@ export function CertificateForm({ certificate }: CertificateFormProps) {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-3 pt-2">
-        <Button type="submit" disabled={isPending}>
+      <div className="border-border/70 flex flex-col-reverse gap-2.5 border-t pt-4 sm:flex-row sm:items-center sm:justify-end sm:gap-3">
+        <Button
+          asChild
+          variant="outline"
+          disabled={isPending}
+          className="w-full sm:w-auto"
+        >
+          <Link href="/admin/certificates">Cancel</Link>
+        </Button>
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="w-full min-w-[140px] sm:w-auto"
+        >
           {isPending
             ? 'Saving…'
             : certificate
               ? 'Save Changes'
               : 'Create Certificate'}
-        </Button>
-        <Button asChild variant="outline" disabled={isPending}>
-          <Link href="/admin/certificates">Cancel</Link>
         </Button>
       </div>
     </form>

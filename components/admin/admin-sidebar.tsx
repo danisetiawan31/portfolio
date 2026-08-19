@@ -1,4 +1,4 @@
-// app/admin/_components/admin-sidebar.tsx
+// components/admin/admin-sidebar.tsx
 
 'use client'
 
@@ -47,10 +47,8 @@ export function AdminSidebar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
 
-  function isActive(href: string): boolean {
-    if (href === '/admin') return pathname === '/admin'
-    return pathname.startsWith(href)
-  }
+  const isActive = (href: string) =>
+    href === '/admin' ? pathname === '/admin' : pathname.startsWith(href)
 
   async function handleLogout() {
     setLoggingOut(true)
@@ -64,20 +62,20 @@ export function AdminSidebar() {
   }
 
   const sidebarContent = (
-    <aside className="flex h-full flex-col bg-slate-900 text-slate-100">
+    <aside className="border-border bg-card text-card-foreground flex h-full flex-col border-r shadow-xs">
       {/* Brand */}
-      <div className="flex h-16 items-center border-b border-slate-700/60 px-6">
+      <div className="border-border/80 flex h-16 items-center border-b px-6">
         <Link
           href="/admin"
-          className="text-lg font-semibold tracking-tight text-white"
+          className="text-foreground text-base font-bold tracking-tight transition-opacity hover:opacity-80"
           onClick={() => setMobileOpen(false)}
         >
-          Admin Panel
+          Dhani <span className="text-primary">Admin</span>
         </Link>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 space-y-0.5 px-3 py-4">
+      <nav className="flex-1 space-y-1 px-3 py-4">
         {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
           const active = isActive(href)
           return (
@@ -86,14 +84,19 @@ export function AdminSidebar() {
               href={href}
               onClick={() => setMobileOpen(false)}
               className={cn(
-                'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                 active
-                  ? 'bg-slate-700 text-white'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100',
+                  ? 'border-primary/20 bg-primary/10 text-primary border font-semibold shadow-2xs'
+                  : 'text-muted-foreground hover:bg-muted/70 hover:text-foreground',
               )}
               aria-current={active ? 'page' : undefined}
             >
-              <Icon className="h-4 w-4 opacity-70" />
+              <Icon
+                className={cn(
+                  'h-4 w-4 shrink-0 transition-colors',
+                  active ? 'text-primary' : 'opacity-70',
+                )}
+              />
               {label}
             </Link>
           )
@@ -101,17 +104,17 @@ export function AdminSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="space-y-1 border-t border-slate-700/60 p-3">
+      <div className="border-border/80 space-y-1.5 border-t p-3">
         {/* Theme toggle */}
         <Button
           variant="ghost"
           onClick={toggleTheme}
-          className="flex w-full items-center justify-start gap-3 rounded-md px-3 py-2 text-sm text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
+          className="text-muted-foreground hover:bg-muted/70 hover:text-foreground flex w-full items-center justify-start gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
           aria-label="Toggle theme"
         >
-          <Sun className="hidden h-4 w-4 opacity-70 dark:block" />
-          <Moon className="block h-4 w-4 opacity-70 dark:hidden" />
-          Toggle theme
+          <Sun className="hidden h-4 w-4 opacity-80 dark:block" />
+          <Moon className="block h-4 w-4 opacity-80 dark:hidden" />
+          Ganti Tema
         </Button>
 
         {/* Logout */}
@@ -119,11 +122,11 @@ export function AdminSidebar() {
           variant="ghost"
           onClick={handleLogout}
           disabled={loggingOut}
-          className="flex w-full items-center justify-start gap-3 rounded-md px-3 py-2 text-sm text-slate-400 transition-colors hover:bg-red-900/40 hover:text-red-300 disabled:opacity-50"
+          className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive flex w-full items-center justify-start gap-3 rounded-lg px-3 py-2 text-sm transition-colors disabled:opacity-50"
           aria-label="Log out"
         >
-          <LogOut className="h-4 w-4 opacity-70" />
-          {loggingOut ? 'Signing out…' : 'Sign out'}
+          <LogOut className="h-4 w-4 opacity-80" />
+          {loggingOut ? 'Keluar…' : 'Keluar'}
         </Button>
       </div>
     </aside>
@@ -137,15 +140,18 @@ export function AdminSidebar() {
       </div>
 
       {/* Mobile: top bar + drawer */}
-      <div className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-slate-700/60 bg-slate-900 px-4 md:hidden">
-        <Link href="/admin" className="text-sm font-semibold text-white">
-          Admin Panel
+      <div className="border-border/80 bg-card/95 fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b px-4 backdrop-blur-md md:hidden">
+        <Link
+          href="/admin"
+          className="text-foreground text-sm font-bold tracking-tight"
+        >
+          Dhani <span className="text-primary">Admin</span>
         </Link>
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setMobileOpen((prev) => !prev)}
-          className="text-slate-400 hover:bg-slate-800 hover:text-white"
+          className="text-muted-foreground hover:bg-muted hover:text-foreground"
           aria-label="Toggle navigation"
         >
           {mobileOpen ? (
@@ -164,7 +170,7 @@ export function AdminSidebar() {
             className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs md:hidden"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 z-50 w-60 md:hidden">
+          <div className="fixed inset-y-0 left-0 z-50 w-64 md:hidden">
             {sidebarContent}
           </div>
         </>

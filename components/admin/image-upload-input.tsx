@@ -8,7 +8,7 @@ import { ImageLightbox } from '@/components/common/image-lightbox'
 
 const mainVariant = {
   initial: { x: 0, y: 0 },
-  animate: { x: 20, y: -20, opacity: 0.9 },
+  animate: { x: 12, y: -12, opacity: 0.9 },
 }
 
 const secondaryVariant = {
@@ -147,9 +147,11 @@ export function ImageUploadInput({
         onClick={handleClick}
         whileHover="animate"
         className={cn(
-          'group/file relative block w-full cursor-pointer overflow-hidden rounded-lg border border-dashed p-10 transition-colors',
-          error ? 'border-destructive' : 'border-border',
-          isDragging ? 'border-primary bg-primary/5' : 'bg-transparent',
+          'group/file relative block w-full cursor-pointer overflow-hidden rounded-xl border border-dashed p-4 transition-colors sm:p-6 md:p-8',
+          error ? 'border-destructive bg-destructive/5' : 'border-border',
+          isDragging
+            ? 'border-primary bg-primary/5'
+            : 'bg-card/40 hover:bg-muted/20',
           disabled && 'cursor-not-allowed opacity-50',
         )}
       >
@@ -169,42 +171,42 @@ export function ImageUploadInput({
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] [background-size:16px_16px] dark:bg-[radial-gradient(#262626_1px,transparent_1px)]"
         />
 
-        <div className="flex flex-col items-center justify-center">
-          <p className="relative z-10 font-sans text-base font-bold text-neutral-700 dark:text-neutral-300">
+        <div className="flex flex-col items-center justify-center text-center">
+          <p className="text-foreground relative z-10 text-sm font-semibold sm:text-base">
             Upload Image
           </p>
-          <p className="relative z-10 mt-2 text-center font-sans text-base font-normal text-neutral-400 dark:text-neutral-400">
-            Drag or drop your image here or click to upload
+          <p className="text-muted-foreground relative z-10 mt-1 text-xs sm:text-sm">
+            Drag and drop your image here or tap to browse
           </p>
 
-          <div className="relative mx-auto mt-10 w-full max-w-xl">
+          <div className="relative mx-auto mt-4 w-full max-w-xl sm:mt-6">
             {preview ? (
               <motion.div
                 layoutId="file-upload"
                 className={cn(
-                  'border-border relative z-10 mx-auto flex w-full flex-col items-center justify-start gap-6 overflow-hidden rounded-md border bg-white p-4 shadow-sm sm:flex-row sm:items-start dark:bg-neutral-900',
+                  'border-border bg-card relative z-10 mx-auto flex w-full flex-col items-center justify-start gap-4 overflow-hidden rounded-lg border p-3 shadow-2xs sm:flex-row sm:items-start sm:p-4',
                 )}
-                onClick={(e) => e.stopPropagation()} // Prevent clicking card from opening file dialog again
+                onClick={(e) => e.stopPropagation()}
               >
                 {/* Image Lightbox Preview */}
-                <div className="bg-muted flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md shadow-inner">
+                <div className="bg-muted flex h-20 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md border shadow-inner sm:h-24 sm:w-28">
                   <ImageLightbox
                     src={preview}
                     alt="Preview"
-                    width={96}
+                    width={112}
                     height={96}
-                    className="h-full w-full"
+                    className="h-full w-full object-cover"
                   />
                 </div>
 
                 {/* File Details */}
-                <div className="flex w-full flex-1 flex-col gap-2">
-                  <div className="flex w-full items-center justify-between gap-4">
+                <div className="flex w-full min-w-0 flex-1 flex-col gap-1.5">
+                  <div className="flex w-full items-center justify-between gap-2">
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       layout
-                      className="max-w-[12rem] truncate text-base font-medium text-neutral-700 sm:max-w-xs dark:text-neutral-300"
+                      className="text-foreground truncate text-xs font-semibold sm:text-sm"
                     >
                       {fileDetails ? fileDetails.name : 'Current Image'}
                     </motion.p>
@@ -213,7 +215,7 @@ export function ImageUploadInput({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         layout
-                        className="shadow-input w-fit shrink-0 rounded-lg px-2 py-1 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-white"
+                        className="bg-muted text-muted-foreground w-fit shrink-0 rounded-md px-1.5 py-0.5 text-[11px]"
                       >
                         {fileDetails.size}
                       </motion.p>
@@ -225,13 +227,13 @@ export function ImageUploadInput({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       layout
-                      className="w-fit rounded-md bg-gray-100 px-2 py-1 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
+                      className="bg-muted/70 text-muted-foreground w-fit rounded px-1.5 py-0.5 font-mono text-[10px]"
                     >
                       {fileDetails.type}
                     </motion.p>
                   )}
 
-                  <div className="mt-auto flex justify-end gap-3 pt-2">
+                  <div className="border-border/60 mt-2 flex items-center justify-end gap-3 border-t pt-1">
                     <button
                       type="button"
                       onClick={(e) => {
@@ -239,10 +241,10 @@ export function ImageUploadInput({
                         inputRef.current?.click()
                       }}
                       disabled={disabled}
-                      className="flex items-center gap-1 text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                      className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-xs font-medium transition-colors"
                     >
-                      <IconUpload className="h-4 w-4" />
-                      Change
+                      <IconUpload className="h-3.5 w-3.5" />
+                      Ganti
                     </button>
                     <button
                       type="button"
@@ -250,8 +252,8 @@ export function ImageUploadInput({
                       disabled={disabled}
                       className="text-destructive hover:text-destructive/80 flex items-center gap-1 text-xs font-medium transition-colors"
                     >
-                      <IconX className="h-4 w-4" />
-                      Remove
+                      <IconX className="h-3.5 w-3.5" />
+                      Hapus
                     </button>
                   </div>
                 </div>
@@ -267,27 +269,27 @@ export function ImageUploadInput({
                     damping: 20,
                   }}
                   className={cn(
-                    'relative z-10 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md bg-white shadow-[0px_10px_50px_rgba(0,0,0,0.1)] transition-colors group-hover/file:shadow-2xl dark:bg-neutral-900',
-                    isDragging ? 'border-primary border' : '',
+                    'bg-card border-border/80 group-hover/file:border-primary/50 relative z-10 mx-auto mt-2 flex h-24 w-full max-w-[7rem] items-center justify-center rounded-xl border shadow-xs transition-colors group-hover/file:shadow-md sm:h-28 sm:max-w-[8rem]',
+                    isDragging ? 'border-primary' : '',
                   )}
                 >
                   {isDragging ? (
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="text-primary flex flex-col items-center text-sm font-medium"
+                      className="text-primary flex flex-col items-center text-xs font-medium"
                     >
-                      Drop it
-                      <IconUpload className="text-primary mt-1 h-5 w-5" />
+                      Lepaskan di sini
+                      <IconUpload className="text-primary mt-1 h-4 w-4" />
                     </motion.p>
                   ) : (
-                    <IconUpload className="h-6 w-6 text-neutral-600 dark:text-neutral-300" />
+                    <IconUpload className="text-muted-foreground group-hover/file:text-primary h-5 w-5 transition-colors" />
                   )}
                 </motion.div>
 
                 <motion.div
                   variants={secondaryVariant}
-                  className="border-primary absolute inset-0 z-0 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md border border-dashed bg-transparent opacity-0"
+                  className="border-primary absolute inset-0 z-0 mx-auto mt-2 flex h-24 w-full max-w-[7rem] items-center justify-center rounded-xl border border-dashed bg-transparent opacity-0 sm:h-28 sm:max-w-[8rem]"
                 />
               </>
             )}

@@ -98,3 +98,9 @@
   - ClickSpark On-Demand Animation: Mengubah infinite loop requestAnimationFrame 60-120 FPS pada `components/ui/click-spark.tsx` menjadi on-demand loop yang hanya aktif 400ms saat user klik, menurunkan penggunaan CPU saat idle menjadi 0%.
   - Background Ambient Optimization: Mengganti filter CSS `blur-[140px]` fixed pada `app/layout.tsx` dengan CSS `radial-gradient` murni untuk mengeliminasi beban rasterization GPU saat scroll.
   - Hero Image Preloading: Menambahkan atribut `priority={idx === 0}` pada kartu thumbnail proyek teratas di `components/sections/hero-client.tsx` untuk mempercepat LCP.
+- [23] Admin Mobile Ergonomics & Theme-Adaptive Sidebar Optimization — selesai, tidak ada spec file (audit UX/UI)
+  Catatan:
+  - Sidebar & Mobile Header: Mengubah warna background hardcoded `bg-slate-900` menjadi CSS variables adaptif tema (`bg-card text-card-foreground border-border`) dengan aksen ungu `bg-primary/10 text-primary` pada menu aktif.
+  - Image Upload Dropzone: Memperkecil padding dropzone `p-4 sm:p-6 md:p-8` dan tinggi kotak di mobile agar lebih kompak dan ergonomis.
+  - Form Layout & Actions: Mengganti padding kaku `p-8` menjadi `p-4 sm:p-6 md:p-8` pada seluruh halaman form `new` & `edit` serta membuat tombol aksi responsif (`flex-col-reverse sm:flex-row`).
+  - Ponytail Cleanup: Merampingkan logika `isActive` dan menghapus varian motion yang tidak terpakai.
