@@ -121,3 +121,8 @@
   Catatan:
   - Dynamic Project Slicing: Menyesuaikan logika di `components/sections/projects.tsx` sehingga jika proyek > 3, grid bawah hanya merender proyek lanjutan (`projects.slice(3)`) dengan judul "More Selected Projects", menghindari pengulangan ganda dengan 3D Hero stack (`projects.slice(0, 3)`).
   - Unused Type Cleanup: Menghapus import unused `type Project` dari `components/sections/projects.tsx`.
+- [27] Ponytail Review Cleanups & Dead Code Deletion — selesai, tidak ada spec file (/ponytail-review)
+  Catatan:
+  - Dead File Deletion: Menghapus `components/ui/resizable-navbar.tsx` (288 baris dead code dari Aceternity tanpa caller yang menyebabkan 2 ESLint warning) dan `components/common/button.tsx` (37 baris wrapper unused).
+  - Component Pruning & Import Unification: Menghapus dead animation variants dan unused decorative box di `components/admin/image-upload-input.tsx` serta menyelaraskan import ke `framer-motion`.
+  - ESLint Clean: Total ESLint warning kini turun menjadi 0 error dan 0 warning.

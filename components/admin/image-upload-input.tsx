@@ -1,20 +1,10 @@
 'use client'
 
 import * as React from 'react'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { Upload as IconUpload, X as IconX } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ImageLightbox } from '@/components/common/image-lightbox'
-
-const mainVariant = {
-  initial: { x: 0, y: 0 },
-  animate: { x: 12, y: -12, opacity: 0.9 },
-}
-
-const secondaryVariant = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-}
 
 interface ImageUploadInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   defaultValue?: string | number | readonly string[]
@@ -262,7 +252,7 @@ export function ImageUploadInput({
               <>
                 <motion.div
                   layoutId="file-upload"
-                  variants={mainVariant}
+                  whileHover={{ scale: 1.02 }}
                   transition={{
                     type: 'spring',
                     stiffness: 300,
@@ -286,11 +276,6 @@ export function ImageUploadInput({
                     <IconUpload className="text-muted-foreground group-hover/file:text-primary h-5 w-5 transition-colors" />
                   )}
                 </motion.div>
-
-                <motion.div
-                  variants={secondaryVariant}
-                  className="border-primary absolute inset-0 z-0 mx-auto mt-2 flex h-24 w-full max-w-[7rem] items-center justify-center rounded-xl border border-dashed bg-transparent opacity-0 sm:h-28 sm:max-w-[8rem]"
-                />
               </>
             )}
           </div>
