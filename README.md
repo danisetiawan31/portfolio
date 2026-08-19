@@ -56,7 +56,7 @@ graph TD
 
     %% AI Flow
     AIChatWidget -->|Stream Question| AIRouteHandler
-    AIRouteHandler -->|Check Rate Limit (10 req/min)| UpstashRedis
+    AIRouteHandler -->|"Check Rate Limit (10 req/min)"| UpstashRedis
     AIRouteHandler -->|Fetch Grounded Context & CV| SupaDB
     AIRouteHandler -->|Stream LLM Inference| OpenRouterAPI
 
