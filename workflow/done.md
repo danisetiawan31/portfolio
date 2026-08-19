@@ -111,3 +111,9 @@
   - User Profile & Theme Dropdown: Membuat `components/admin/nav-user.tsx` pada footer sidebar dengan avatar inisial, info akun, opsi ganti tema, dan tombol keluar.
   - Sticky Top Bar & Breadcrumbs: Membuat `components/admin/admin-shell.tsx` dengan `SidebarTrigger` (shortcut `Ctrl+B`), dynamic route breadcrumbs, dan tombol cepat "Lihat Website".
   - Global TooltipProvider: Menambahkan `TooltipProvider` pada `components/providers.tsx` untuk mendukung rendering tooltip saat sidebar diciutkan.
+- [25] Comprehensive SEO Engine, Dynamic OpenGraph Generator & Documentation Sync — selesai, tidak ada spec file (optimasi SEO)
+  Catatan:
+  - Dynamic OpenGraph Banners: Membuat `app/opengraph-image.tsx` untuk halaman utama dan `app/projects/[slug]/opengraph-image.tsx` per proyek menggunakan `next/og` `ImageResponse` (resolusi 1200x630, dark modern violet, tech pills).
+  - Dynamic Sitemap & Robots: Membuat `app/sitemap.ts` (mengambil seluruh slug proyek publik otomatis dengan lastModified) dan `app/robots.ts` (mengizinkan publik, memblokir `/admin` dan `/api`).
+  - Metadata Global & Structured Data: Memperbarui `app/layout.tsx` dengan `metadataBase`, template judul, OpenGraph & Twitter tags lengkap, serta skema JSON-LD `Person` di `app/page.tsx` dan `SoftwareApplication` di `app/projects/[slug]/page.tsx`.
+  - README.md Sync: Memperbarui dokumentasi lengkap mencakup arsitektur AI Assistant, Upstash Redis rate limiter, shadcn/ui sidebar-07, migrasi skema `06_profile_settings.sql` dan `07_ai_settings.sql`, testing suite, dan variabel lingkungan.

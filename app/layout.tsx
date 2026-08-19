@@ -18,9 +18,67 @@ const geistMono = Geist_Mono({
   display: 'swap',
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+
 export const metadata: Metadata = {
-  title: 'Dani Portfolio',
-  description: 'Fullstack Developer Portfolio',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Ahmad Dhani Setiawan — Fullstack Developer',
+    template: '%s | Ahmad Dhani Setiawan',
+  },
+  description:
+    'Fullstack Developer specializing in high-performance web applications built with Next.js, TypeScript, PostgreSQL, and Supabase.',
+  keywords: [
+    'Ahmad Dhani Setiawan',
+    'Fullstack Developer',
+    'Next.js Developer',
+    'React Developer',
+    'TypeScript',
+    'PostgreSQL',
+    'Supabase',
+    'Web Developer Indonesia',
+    'Frontend Developer',
+    'Backend Developer',
+  ],
+  authors: [
+    {
+      name: 'Ahmad Dhani Setiawan',
+      url: 'https://github.com/danisetiawan31',
+    },
+  ],
+  creator: 'Ahmad Dhani Setiawan',
+  publisher: 'Ahmad Dhani Setiawan',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName: 'Ahmad Dhani Setiawan Portfolio',
+    title: 'Ahmad Dhani Setiawan — Fullstack Developer',
+    description:
+      'Explore selected fullstack projects, engineering case studies, and modern web applications built by Ahmad Dhani Setiawan.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ahmad Dhani Setiawan — Fullstack Developer',
+    description:
+      'Explore selected fullstack projects, engineering case studies, and modern web applications built by Ahmad Dhani Setiawan.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({

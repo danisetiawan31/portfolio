@@ -18,9 +18,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) {
     return { title: 'Project Not Found' }
   }
+
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+
   return {
-    title: `${project.title} - Dani Setiawan`,
+    title: project.title,
     description: project.description,
+    keywords: [
+      project.title,
+      ...project.tech_stack,
+      'Ahmad Dhani Setiawan',
+      'Fullstack Project',
+    ],
+    openGraph: {
+      type: 'article',
+      title: `${project.title} — Ahmad Dhani Setiawan`,
+      description: project.description,
+      url: `${siteUrl}/projects/${project.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} — Ahmad Dhani Setiawan`,
+      description: project.description,
+    },
   }
 }
 
@@ -32,6 +53,26 @@ export default async function ProjectDetailPage({ params }: Props) {
     notFound()
   }
 
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: project.title,
+    description: project.description,
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Any',
+    author: {
+      '@type': 'Person',
+      name: 'Ahmad Dhani Setiawan',
+      url: siteUrl,
+    },
+    url: `${siteUrl}/projects/${project.slug}`,
+    ...(project.live_url ? { downloadUrl: project.live_url } : {}),
+    keywords: project.tech_stack.join(', '),
+  }
+
   // Split title into first word and the rest
   const titleWords = project.title.trim().split(' ')
   const firstWord = titleWords[0]
@@ -39,6 +80,10 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <SectionContainer className="py-10 md:py-16 lg:py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="space-y-4 lg:space-y-8">
         <FadeUpOnScroll>
           <div className="mb-5 lg:mb-8">
