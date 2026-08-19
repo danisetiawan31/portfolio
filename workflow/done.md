@@ -117,3 +117,7 @@
   - Dynamic Sitemap & Robots: Membuat `app/sitemap.ts` (mengambil seluruh slug proyek publik otomatis dengan lastModified) dan `app/robots.ts` (mengizinkan publik, memblokir `/admin` dan `/api`).
   - Metadata Global & Structured Data: Memperbarui `app/layout.tsx` dengan `metadataBase`, template judul, OpenGraph & Twitter tags lengkap, serta skema JSON-LD `Person` di `app/page.tsx` dan `SoftwareApplication` di `app/projects/[slug]/page.tsx`.
   - README.md Sync: Memperbarui dokumentasi lengkap mencakup arsitektur AI Assistant, Upstash Redis rate limiter, shadcn/ui sidebar-07, migrasi skema `06_profile_settings.sql` dan `07_ai_settings.sql`, testing suite, dan variabel lingkungan.
+- [26] Projects Section Duplicate Handling & Dynamic Slicing Logic — selesai, tidak ada spec file (refactor logic)
+  Catatan:
+  - Dynamic Project Slicing: Menyesuaikan logika di `components/sections/projects.tsx` sehingga jika proyek > 3, grid bawah hanya merender proyek lanjutan (`projects.slice(3)`) dengan judul "More Selected Projects", menghindari pengulangan ganda dengan 3D Hero stack (`projects.slice(0, 3)`).
+  - Unused Type Cleanup: Menghapus import unused `type Project` dari `components/sections/projects.tsx`.

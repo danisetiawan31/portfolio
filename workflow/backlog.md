@@ -5,4 +5,4 @@
 - [x] SEO (next/og dynamic OpenGraph generator, JSON-LD Schema, XML sitemap.ts, robots.ts)
 - [ ] Performance & accessibility audit — status belum dikonfirmasi
 - [ ] Frontend refactor/cleanup — non-kritikal, prioritas paling rendah
-- [ ] Fix: ProjectsSection render semua project tanpa slice, seharusnya index >= 3 (duplikat tampilan dengan HeroClient yang render index 0-2) — ditemukan saat investigasi fitur project detail page
+- [x] Fix: ProjectsSection render semua project tanpa slice, seharusnya index >= 3 (duplikat tampilan dengan HeroClient yang render index 0-2) — ditemukan saat investigasi fitur project detail page
