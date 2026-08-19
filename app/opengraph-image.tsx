@@ -170,7 +170,7 @@ export default async function Image() {
             letterSpacing: '-0.02em',
           }}
         >
-          dhanisetiawan.dev
+          portfolio-dhani.vercel.app
         </div>
       </div>
     </div>,

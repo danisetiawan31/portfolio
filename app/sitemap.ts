@@ -3,7 +3,7 @@ import { getPublicProjects } from '@/lib/supabase/queries/projects'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-dhani.vercel.app'
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

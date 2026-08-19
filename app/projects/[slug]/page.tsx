@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-dhani.vercel.app'
 
   return {
     title: project.title,
@@ -54,7 +54,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   }
 
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-dhani.vercel.app'
 
   const jsonLd = {
     '@context': 'https://schema.org',

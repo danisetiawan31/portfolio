@@ -8,7 +8,8 @@ import CertificatesSection from '@/components/sections/certificates'
 import ContactSection from '@/components/sections/contact'
 import Footer from '@/components/layout/footer'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-dhani.vercel.app'
 
 const personJsonLd = {
   '@context': 'https://schema.org',

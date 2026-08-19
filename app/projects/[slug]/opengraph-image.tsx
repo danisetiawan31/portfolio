@@ -166,7 +166,7 @@ export default async function Image({
             fontWeight: 700,
           }}
         >
-          dhanisetiawan.dev
+          portfolio-dhani.vercel.app
         </div>
       </div>
     </div>,

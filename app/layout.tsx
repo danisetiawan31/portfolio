@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
   display: 'swap',
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dhanisetiawan.dev'
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-dhani.vercel.app'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
