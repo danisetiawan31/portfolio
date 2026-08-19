@@ -1,6 +1,6 @@
 # workflow/backlog.md
 
-- [ ] AI Assistant (Route Handler /api/ai, Vercel AI SDK, OpenRouter, rate limit Upstash Redis)
+- [x] AI Assistant (Route Handler /api/ai, Vercel AI SDK, OpenRouter, rate limit Upstash Redis)
 - [x] Testing (Playwright E2E: smoke tests, admin proxy route guard — Vitest: utility functions)
 - [ ] SEO (next/og, JSON-LD) — status belum dikonfirmasi
 - [ ] Performance & accessibility audit — status belum dikonfirmasi

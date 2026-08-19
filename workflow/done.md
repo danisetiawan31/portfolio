@@ -104,3 +104,10 @@
   - Image Upload Dropzone: Memperkecil padding dropzone `p-4 sm:p-6 md:p-8` dan tinggi kotak di mobile agar lebih kompak dan ergonomis.
   - Form Layout & Actions: Mengganti padding kaku `p-8` menjadi `p-4 sm:p-6 md:p-8` pada seluruh halaman form `new` & `edit` serta membuat tombol aksi responsif (`flex-col-reverse sm:flex-row`).
   - Ponytail Cleanup: Merampingkan logika `isActive` dan menghapus varian motion yang tidak terpakai.
+- [24] Admin Sidebar-07 Template Integration (Flat Menu Structure) — selesai, tidak ada spec file (permintaan template shadcn/ui)
+  Catatan:
+  - Integrasi Komponen: Memasang komponen dasar shadcn/ui (`sidebar`, `sheet`, `tooltip`, `separator`, `breadcrumb`, `dropdown-menu`, `avatar`, `skeleton`) dan hook `use-mobile` berbasis `useSyncExternalStore`.
+  - Flat Single-Tier Menu: Menerapkan tata letak `sidebar-07` dengan menghapus sub-menu expandable accordion, menghasilkan 7 menu flat yang rapi dengan tooltip otomatis pada mode collapsed.
+  - User Profile & Theme Dropdown: Membuat `components/admin/nav-user.tsx` pada footer sidebar dengan avatar inisial, info akun, opsi ganti tema, dan tombol keluar.
+  - Sticky Top Bar & Breadcrumbs: Membuat `components/admin/admin-shell.tsx` dengan `SidebarTrigger` (shortcut `Ctrl+B`), dynamic route breadcrumbs, dan tombol cepat "Lihat Website".
+  - Global TooltipProvider: Menambahkan `TooltipProvider` pada `components/providers.tsx` untuk mendukung rendering tooltip saat sidebar diciutkan.
