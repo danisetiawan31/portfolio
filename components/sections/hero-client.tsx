@@ -226,12 +226,14 @@ export default function HeroClient({
               </motion.a>
             </MovingBorderButton>
 
-            {/* Recruiter Quick-Packet Button */}
-            <RecruiterSummaryButton
-              projects={projects}
-              skills={skills}
-              cvUrl={cvUrl}
-            />
+            {/* Recruiter Quick-Packet Button — moving border wrapper */}
+            <MovingBorderButton>
+              <RecruiterSummaryButton
+                projects={projects}
+                skills={skills}
+                cvUrl={cvUrl}
+              />
+            </MovingBorderButton>
 
             {/* GitHub — moving border */}
             <MovingBorderButton>

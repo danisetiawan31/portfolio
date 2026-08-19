@@ -59,29 +59,29 @@ export function RecruiterSummaryButton({
       whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       aria-label="Salin Ringkasan untuk HR"
-      title="Salin Ringkasan untuk HR (Recruiter Quick-Packet)"
-      className={`group border-border/80 bg-background/80 hover:border-primary/40 hover:bg-muted/60 relative flex items-center gap-2 overflow-hidden rounded-full border px-4 py-3 text-xs font-medium backdrop-blur-md transition-colors sm:text-sm ${
+      title="Salin Ringkasan untuk HR (Summary)"
+      className={`group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-6 py-3.5 shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:bg-zinc-950 ${
         className ?? ''
       }`}
     >
-      {/* Subtle shine sweep on hover */}
+      {/* shine sweep */}
       <span
         aria-hidden
-        className="bg-primary/5 absolute inset-0 -translate-x-full skew-x-[-20deg] transition-transform duration-700 group-hover:translate-x-[200%]"
+        className="absolute inset-0 -translate-x-full skew-x-[-20deg] bg-zinc-100/60 transition-transform duration-700 group-hover:translate-x-[200%] dark:bg-white/5"
       />
 
       {copied ? (
         <>
-          <Check className="relative h-4 w-4 text-emerald-500 transition-transform duration-200" />
-          <span className="relative font-semibold text-emerald-600 dark:text-emerald-400">
-            Tersalin!
+          <Check className="relative h-[18px] w-[18px] text-emerald-600 dark:text-emerald-400" />
+          <span className="relative text-sm font-medium text-emerald-600 dark:text-emerald-400">
+            Copied!
           </span>
         </>
       ) : (
         <>
-          <ClipboardList className="text-muted-foreground group-hover:text-primary relative h-4 w-4 transition-colors" />
-          <span className="text-foreground/90 group-hover:text-foreground relative">
-            <span className="hidden sm:inline">Salin </span>Ringkasan HR
+          <ClipboardList className="relative h-[18px] w-[18px] text-zinc-900 dark:text-zinc-100" />
+          <span className="relative text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            Summary
           </span>
         </>
       )}

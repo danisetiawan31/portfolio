@@ -21,7 +21,7 @@ test.describe('Recruiter Quick-Packet Button', () => {
       page.getByText(/Ringkasan Profil Berhasil Disalin!/i),
     ).toBeVisible({ timeout: 5000 })
 
-    // Check button state updates to "Tersalin!"
-    await expect(page.getByText(/Tersalin!/i)).toBeVisible()
+    // Check button state updates to "Copied!"
+    await expect(page.getByText(/Copied!/i)).toBeVisible()
   })
 })
