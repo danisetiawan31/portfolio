@@ -126,3 +126,9 @@
   - Dead File Deletion: Menghapus `components/ui/resizable-navbar.tsx` (288 baris dead code dari Aceternity tanpa caller yang menyebabkan 2 ESLint warning) dan `components/common/button.tsx` (37 baris wrapper unused).
   - Component Pruning & Import Unification: Menghapus dead animation variants dan unused decorative box di `components/admin/image-upload-input.tsx` serta menyelaraskan import ke `framer-motion`.
   - ESLint Clean: Total ESLint warning kini turun menjadi 0 error dan 0 warning.
+- [28] Recruiter Quick-Packet (1-Click Summary Dossier) — selesai, tidak ada spec file (fitur standout)
+  Catatan:
+  - Dynamic Generator: Membuat `lib/utils/recruiter-summary.ts` yang otomatis merangkai format kandidat (Nama, Role, Tech Stack dinamis dari Supabase `skills`, 3 proyek teratas dari Supabase `projects`, dan link CV terbaru dari `profile_settings`).
+  - Interactive UI: Membuat `components/common/recruiter-summary-button.tsx` di Hero CTA dengan integrasi `framer-motion`, `sonner` rich toast notification, dan copy feedback "Tersalin!".
+  - Layout & Notification: Menambahkan `<Toaster position="top-right" richColors />` di `app/layout.tsx`.
+  - Automated Tests: Menambahkan 2 Vitest unit tests di `lib/utils/recruiter-summary.test.ts` dan 1 E2E Playwright test di `tests/e2e/recruiter-summary.spec.ts` (seluruh 25 unit test dan 11 E2E test lulus 100%).

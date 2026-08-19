@@ -18,6 +18,8 @@ import {
   MarqueeItem,
 } from '@/components/kibo-ui/marquee'
 import { type Project } from '@/lib/supabase/queries/projects'
+import { type Skill } from '@/lib/supabase/queries/skills'
+import { RecruiterSummaryButton } from '@/components/common/recruiter-summary-button'
 
 // ── Data ────────────────────────────────────────────────────────────────────
 const techStackLogos = [
@@ -77,10 +79,12 @@ function MovingBorderButton({
 
 export default function HeroClient({
   projects,
+  skills,
   cvUrl,
   cvFileName,
 }: {
   projects: Project[]
+  skills?: Skill[]
   cvUrl?: string | null
   cvFileName?: string | null
 }) {
@@ -196,7 +200,7 @@ export default function HeroClient({
           {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-3"
+            className="flex flex-wrap items-center gap-3"
           >
             {/* Download CV — moving border wrapper */}
             <MovingBorderButton>
@@ -221,6 +225,13 @@ export default function HeroClient({
                 </span>
               </motion.a>
             </MovingBorderButton>
+
+            {/* Recruiter Quick-Packet Button */}
+            <RecruiterSummaryButton
+              projects={projects}
+              skills={skills}
+              cvUrl={cvUrl}
+            />
 
             {/* GitHub — moving border */}
             <MovingBorderButton>

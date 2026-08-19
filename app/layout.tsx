@@ -4,6 +4,7 @@ import { Inter, Geist_Mono } from 'next/font/google'
 import { Providers } from '@/components/providers'
 import ClickSpark from '@/components/ui/click-spark'
 import { ChatWidget } from '@/components/ai/chat-widget'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
 const inter = Inter({
@@ -130,6 +131,7 @@ export default function RootLayout({
             {children}
           </ClickSpark>
           <ChatWidget />
+          <Toaster position="top-right" richColors />
         </Providers>
       </body>
     </html>
