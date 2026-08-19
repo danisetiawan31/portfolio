@@ -13,7 +13,6 @@ import {
   Award,
   FileText,
   Bot,
-  Command,
 } from 'lucide-react'
 
 import {
@@ -62,8 +61,30 @@ export function AdminSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/admin">
-                <div className="bg-primary text-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Command className="size-4" />
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg border border-violet-500/30 bg-zinc-950 p-1 shadow-xs">
+                  <svg
+                    viewBox="0 0 100 100"
+                    fill="none"
+                    className="size-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M 20 20 L 48 20 C 66 20 78 32 78 50 C 78 68 66 80 48 80 L 20 80 Z"
+                      stroke="currentColor"
+                      strokeWidth="12"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-violet-400"
+                    />
+                    <path
+                      d="M 64 34 C 60 27 50 26 42 29 C 32 34 34 46 48 50 C 64 54 66 66 56 73 C 48 77 36 75 30 69"
+                      stroke="currentColor"
+                      strokeWidth="9"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-cyan-400"
+                    />
+                  </svg>
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-bold">Dhani Admin</span>

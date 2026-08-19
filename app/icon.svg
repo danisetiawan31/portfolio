@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="dsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c4b5fd" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="dsGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Background -->
+  <rect width="100" height="100" rx="24" fill="#09090b" stroke="#8b5cf6" stroke-opacity="0.45" stroke-width="2" />
+
+  <!-- Letter D (Geometric Violet/Indigo/Cyan Glow) -->
+  <path
+    d="M 20 20 L 48 20 C 66 20 78 32 78 50 C 78 68 66 80 48 80 L 20 80 Z"
+    stroke="url(#dsGrad)"
+    stroke-width="12"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Interlocking S Stream (White/Lavender Glow) -->
+  <path
+    d="M 64 34 C 60 27 50 26 42 29 C 32 34 34 46 48 50 C 64 54 66 66 56 73 C 48 77 36 75 30 69"
+    stroke="url(#dsGrad2)"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
