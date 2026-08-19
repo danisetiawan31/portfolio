@@ -16,7 +16,7 @@ function CardContent({ project }: { project: Project }) {
       {/* Thumbnail */}
       <Link
         href={`/projects/${project.slug}`}
-        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800"
+        className="border-border/60 relative aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-zinc-100 transition-all duration-300 group-hover:border-violet-500/40 group-hover:shadow-md dark:bg-zinc-800/80"
       >
         {project.thumbnail_url ? (
           <Image
@@ -36,9 +36,11 @@ function CardContent({ project }: { project: Project }) {
       {/* Info Container */}
       <div className="flex items-start justify-between gap-4 px-1">
         <div className="flex flex-col gap-2">
-          <h3 className="font-heading text-foreground text-lg font-bold sm:text-xl">
-            {project.title}
-          </h3>
+          <Link href={`/projects/${project.slug}`}>
+            <h3 className="font-heading text-foreground group-hover:text-primary text-lg font-bold transition-colors sm:text-xl">
+              {project.title}
+            </h3>
+          </Link>
           {project.tech_stack?.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {project.tech_stack.map((tech) => (
@@ -50,10 +52,10 @@ function CardContent({ project }: { project: Project }) {
 
         <Link
           href={`/projects/${project.slug}`}
-          className="text-muted-foreground hover:text-foreground mt-1 flex items-center gap-1.5 text-sm font-medium transition-colors"
+          className="text-muted-foreground group-hover:text-foreground mt-1 flex shrink-0 items-center gap-1 text-sm font-medium transition-colors"
         >
-          View Project
-          <ArrowUpRight className="h-4 w-4" />
+          Case Study
+          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </div>
     </div>

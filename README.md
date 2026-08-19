@@ -11,7 +11,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![Upstash Redis](https://img.shields.io/badge/Upstash_Redis-Rate_Limiter-00E599?style=for-the-badge&logo=redis&logoColor=black)](https://upstash.com/)
 [![OpenRouter](https://img.shields.io/badge/AI_Assistant-OpenRouter_%26_Vercel_AI_SDK-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](https://openrouter.ai/)
-[![Tests Passing](https://img.shields.io/badge/Vitest_%26_Playwright-36_Passed-22c55e?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Tests Passing](https://img.shields.io/badge/Vitest_%26_Playwright-40_Passed-22c55e?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
 
 <br />
 
@@ -99,15 +99,18 @@ graph TD
 
 ## ⚡ Core Engineering Highlights
 
-| Feature                            | Technical Architecture                                                   | Value Proposition                                                                                                                  |
-| :--------------------------------- | :----------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| **🤖 AI Assistant**                | Vercel AI SDK (`useChat`) + OpenRouter + Supabase Context Grounding      | Visitors can chat with an AI assistant that understands Ahmad Dhani's real work history, projects, and parsed CV in real time.     |
-| **⚡ Upstash Redis Rate Limiting** | `@upstash/ratelimit` with Sliding Window (10 req / min per IP)           | Protects AI endpoints against token depletion, bots, and DDoS abuse with zero cold start penalty.                                  |
-| **💼 Recruiter Quick-Packet**      | `navigator.clipboard` API + Sonner Toast + Dynamic Supabase Query        | Recruiter can copy an organized markdown/text hiring dossier in 1 second, ready to paste into Slack/Notion/ATS.                    |
-| **💎 Pure Vector SVG Branding**    | Native `app/icon.svg` & `public/icon.svg` (< 1 KB)                       | Replaces default Vercel branding with a custom Geometric DS Monogram that scales infinitely at 0 KB build overhead.                |
-| **📐 Dynamic Project Slicing**     | Server-side array slicing (`projects.slice(0,3)` vs `projects.slice(3)`) | Hero showcases top 3 featured works in 3D parallax stack; the catalog grid renders remaining projects without duplication.         |
-| **🖼️ Dynamic OpenGraph Engine**    | `next/og` Edge `ImageResponse` (1200×630)                                | Generates custom social cards for `/` and per-project dynamic routes `/projects/[slug]` with stack tags and descriptions.          |
-| **🔐 Admin CMS (`sidebar-07`)**    | shadcn/ui flat sidebar + `requireAuth()` Server Action guard             | Single-admin control panel with PDF CV parser (`pdf-parse`), visibility toggles, and atomic cache invalidation (`revalidatePath`). |
+| Feature                                   | Technical Architecture                                                     | Value Proposition                                                                                                                   |
+| :---------------------------------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| **🤖 AI Assistant**                       | Vercel AI SDK (`useChat`) + OpenRouter + Supabase Context Grounding        | Visitors can chat with an AI assistant that understands Ahmad Dhani's real work history, projects, and parsed CV in real time.      |
+| **⚡ Dynamic GitHub README Auto-Sync**    | Server Component fetcher (`lib/github/readme.ts`) + Next.js ISR (1h cache) | Automatically fetches and renders live `README.md` from project GitHub repos, keeping case studies up-to-date with 0 manual effort. |
+| **📊 Interactive Mermaid Diagram Engine** | `mermaid` client-side SVG renderer + Dual-Theme (Dark/Light) Palettes      | Automatically compiles ```mermaid code blocks in READMEs into clean, interactive system architecture SVG diagrams.                  |
+| **🧭 Floating Edge Project Navigation**   | Glassmorphic Center Edge Buttons (`<FloatingProjectNav />`)                | Sticky side pills on desktop allow frictionless navigation across adjacent projects at any scroll position.                         |
+| **⚡ Upstash Redis Rate Limiting**        | `@upstash/ratelimit` with Sliding Window (10 req / min per IP)             | Protects AI endpoints against token depletion, bots, and DDoS abuse with zero cold start penalty.                                   |
+| **💼 Recruiter Quick-Packet**             | `navigator.clipboard` API + Sonner Toast + Dynamic Supabase Query          | Recruiter can copy an organized markdown/text hiring dossier in 1 second, ready to paste into Slack/Notion/ATS.                     |
+| **💎 Pure Vector SVG Branding**           | Native `app/icon.svg` & `public/icon.svg` (< 1 KB)                         | Replaces default Vercel branding with a custom Geometric DS Monogram that scales infinitely at 0 KB build overhead.                 |
+| **📐 Dynamic Project Slicing**            | Server-side array slicing (`projects.slice(0,3)` vs `projects.slice(3)`)   | Hero showcases top 3 featured works in 3D parallax stack; the catalog grid renders remaining projects without duplication.          |
+| **🖼️ Dynamic OpenGraph Engine**           | `next/og` Edge `ImageResponse` (1200×630)                                  | Generates custom social cards for `/` and per-project dynamic routes `/projects/[slug]` with stack tags and descriptions.           |
+| **🔐 Admin CMS (`sidebar-07`)**           | shadcn/ui flat sidebar + `requireAuth()` Server Action guard               | Single-admin control panel with PDF CV parser (`pdf-parse`), visibility toggles, and atomic cache invalidation (`revalidatePath`).  |
 
 ---
 
@@ -142,30 +145,31 @@ sequenceDiagram
 
 ## 🛠️ Tech Stack & Infrastructure Matrix
 
-| Category                  | Technologies                                                           |
-| :------------------------ | :--------------------------------------------------------------------- |
-| **Frontend Framework**    | Next.js 16.2 (App Router), React 19, TypeScript (Strict Mode)          |
-| **UI & Styling**          | Tailwind CSS v4, shadcn/ui, Radix UI Primitives, Lucide Icons          |
-| **Animation & Motion**    | Framer Motion, Kibo UI Marquee, Moving Border Shaders                  |
-| **AI Assistant & LLM**    | Vercel AI SDK (`useChat`), OpenRouter API (Gemini 2.5 Flash / Llama 3) |
-| **Rate Limiting & Cache** | Upstash Redis (Distributed REST API, Sliding Window)                   |
-| **Database & Storage**    | Supabase PostgreSQL (Row Level Security), Supabase Storage Buckets     |
-| **Authentication**        | Supabase Auth (Single Admin User with Middleware Proxy Guard)          |
-| **Email Service**         | Resend API Integration                                                 |
-| **Testing Suite**         | Playwright (11 E2E Tests), Vitest (25 Unit Tests)                      |
-| **Deployment**            | Vercel Edge Network                                                    |
+| Category                     | Technologies                                                           |
+| :--------------------------- | :--------------------------------------------------------------------- |
+| **Frontend Framework**       | Next.js 16.2 (App Router), React 19, TypeScript (Strict Mode)          |
+| **UI & Styling**             | Tailwind CSS v4, shadcn/ui, Radix UI Primitives, Lucide Icons          |
+| **Animation & Motion**       | Framer Motion, Kibo UI Marquee, Moving Border Shaders                  |
+| **Markdown & Diagrams**      | `react-markdown`, `remark-gfm`, `rehype-raw`, `mermaid` (SVG renderer) |
+| **AI Assistant & LLM**       | Vercel AI SDK (`useChat`), OpenRouter API (Gemini 2.5 Flash / Llama 3) |
+| **Rate Limiting & Cache**    | Upstash Redis (Distributed REST API, Sliding Window)                   |
+| **Database & Storage**       | Supabase PostgreSQL (Row Level Security), Supabase Storage Buckets     |
+| **Authentication**           | Supabase Auth (Single Admin User with Middleware Proxy Guard)          |
+| **Email Service**            | Resend API Integration                                                 |
+| **Testing Suite (40 Tests)** | Playwright (12 E2E Tests), Vitest (28 Unit Tests)                      |
+| **Deployment**               | Vercel Edge Network                                                    |
 
 ---
 
 ## 🧪 Automated Testing Suite
 
-The repository contains an automated test suite with **36 total automated tests** (25 unit tests + 11 end-to-end tests):
+The repository contains a robust automated test suite with **40 total automated tests** (28 unit tests + 12 end-to-end tests):
 
 ```bash
-# Run Vitest unit tests (AI context grounding, rate limiter, summary generator, actions)
+# Run Vitest unit tests (AI context grounding, rate limiter, GitHub sync parser, summary generator, actions)
 npm run test
 
-# Run Playwright E2E tests (Admin auth proxy protection, AI chat widget, recruiter copy, home)
+# Run Playwright E2E tests (Admin auth proxy protection, AI chat widget, recruiter copy, case study navigation, home)
 npx playwright test
 ```
 

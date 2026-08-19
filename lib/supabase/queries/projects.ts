@@ -37,3 +37,21 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
   return data
 }
+
+export async function getAdjacentProjects(currentSlug: string): Promise<{
+  prev: Project | null
+  next: Project | null
+}> {
+  const projects = await getPublicProjects()
+  const currentIndex = projects.findIndex((p) => p.slug === currentSlug)
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null }
+  }
+
+  const prev = currentIndex > 0 ? projects[currentIndex - 1] : null
+  const next =
+    currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
+
+  return { prev, next }
+}

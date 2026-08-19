@@ -138,3 +138,11 @@
   - Metadata Icons: Mendaftarkan `icons: { icon: '/icon.svg', shortcut: '/icon.svg', apple: '/icon.svg' }` di `app/layout.tsx`.
   - Admin Sidebar Brand Icon: Memperbarui header brand pada `components/admin/admin-sidebar.tsx` dengan ikon monogram SVG custom "DS" senada.
   - Verifikasi: Lulus Impeccable Design Detector (0 defects) dan 25/25 Vitest tests.
+- [30] Dynamic GitHub README Auto-Sync, Interactive Mermaid Diagrams & Floating Navigation — selesai, spec: implementation_plan.md
+  Catatan:
+  - GitHub Fetching Engine: Membuat `lib/github/readme.ts` dengan multi-branch resolution (main/master, case-insensitive filename), Next.js ISR caching (1 jam), dan normalisasi link/gambar relatif GitHub secara otomatis.
+  - Case Study Component: Membuat `components/sections/project-case-study.tsx` dengan `react-markdown`, `remark-gfm`, dan `rehype-raw` untuk me-render markdown, tabel, code block, shields badges, dan detail collapsible bebas hydration error.
+  - Interactive Mermaid Diagram: Membuat `components/common/mermaid-viewer.tsx` yang me-render diagram arsitektur grafis SVG dinamis dengan palet _electric violet/indigo_ adaptif dark/light mode.
+  - Floating Edge Navigation: Membuat `components/sections/floating-project-nav.tsx` untuk navigasi melayang (_Previous & Next Project_) di sisi kiri dan kanan layar dengan hover tooltip.
+  - Layout & Hierarchy: Menjaga struktur header asli dengan paragraf deskripsi ringkas, tombol aksi, gambar showcase, tech stack & source code tepat di bawah gambar, serta indikator _Auto-synced with GitHub README_.
+  - Automated Tests: Menambahkan 3 unit tests di `lib/github/readme.test.ts` dan 1 E2E Playwright test di `tests/e2e/project-case-study.spec.ts` (total 40 automated tests: 28 Vitest unit tests & 12 Playwright E2E tests passing 100%).
