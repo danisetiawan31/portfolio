@@ -5,52 +5,46 @@ export type Tag = {
 
 export const TECH_STACK_OPTIONS: Tag[] = [
   // Languages
-  { id: 'javascript', label: 'JavaScript' },
   { id: 'typescript', label: 'TypeScript' },
+  { id: 'javascript', label: 'JavaScript' },
+  { id: 'go', label: 'Go' },
   { id: 'python', label: 'Python' },
   { id: 'php', label: 'PHP' },
-  { id: 'java', label: 'Java' },
-  { id: 'dart', label: 'Dart' },
-  { id: 'golang', label: 'Golang' },
-  { id: 'css', label: 'CSS' },
 
   // Frontend
-  { id: 'react', label: 'React' },
   { id: 'nextjs', label: 'Next.js' },
-  { id: 'flutter', label: 'Flutter' },
-  { id: 'vite', label: 'Vite' },
+  { id: 'react', label: 'React' },
+  { id: 'angular', label: 'Angular' },
+  { id: 'vuejs', label: 'Vue.js' },
   { id: 'tailwind', label: 'Tailwind CSS' },
-  { id: 'bootstrap', label: 'Bootstrap' },
-  { id: 'redux', label: 'Redux' },
-  { id: 'figma', label: 'Figma' },
+  { id: 'spartanui', label: 'Spartan UI' },
+  { id: 'vite', label: 'Vite' },
 
   // Backend
-  { id: 'nodejs', label: 'Node.js' },
-  { id: 'express', label: 'Express.js' },
   { id: 'nestjs', label: 'NestJS' },
   { id: 'laravel', label: 'Laravel' },
-  { id: 'codeigniter', label: 'CodeIgniter' },
+  { id: 'fastapi', label: 'FastAPI' },
+  { id: 'codeigniter4', label: 'CodeIgniter 4' },
+  { id: 'websocket', label: 'WebSocket' },
 
-  // Databases
-  { id: 'mysql', label: 'MySQL' },
+  // Databases & ORM
   { id: 'postgresql', label: 'PostgreSQL' },
-  { id: 'mongodb', label: 'MongoDB' },
-  { id: 'firebase', label: 'Firebase' },
+  { id: 'mysql', label: 'MySQL' },
+  { id: 'redis', label: 'Redis' },
   { id: 'supabase', label: 'Supabase' },
-
-  // Auth / Utils
-  { id: 'jwt', label: 'JWT' },
-  { id: 'zod', label: 'Zod' },
-  { id: 'zustand', label: 'Zustand' },
   { id: 'prisma', label: 'Prisma' },
-  { id: 'framermotion', label: 'Framer Motion' },
+  { id: 'sqlc', label: 'sqlc' },
 
-  // Tools & Infra
+  // Testing & QA
+  { id: 'playwright', label: 'Playwright' },
+  { id: 'vitest', label: 'Vitest' },
+  { id: 'jest', label: 'Jest' },
+  { id: 'pest', label: 'Pest' },
+
+  // Tools & Infrastructure
   { id: 'docker', label: 'Docker' },
-  { id: 'jenkins', label: 'Jenkins' },
+  { id: 'cicd', label: 'CI/CD' },
   { id: 'git', label: 'Git' },
-  { id: 'github', label: 'GitHub' },
   { id: 'postman', label: 'Postman' },
-  { id: 'jira', label: 'Jira' },
-  { id: 'vercel', label: 'Vercel' },
+  { id: 'linux', label: 'Linux' },
 ]
