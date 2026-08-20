@@ -145,4 +145,25 @@
   - Interactive Mermaid Diagram: Membuat `components/common/mermaid-viewer.tsx` yang me-render diagram arsitektur grafis SVG dinamis dengan palet _electric violet/indigo_ adaptif dark/light mode.
   - Floating Edge Navigation: Membuat `components/sections/floating-project-nav.tsx` untuk navigasi melayang (_Previous & Next Project_) di sisi kiri dan kanan layar dengan hover tooltip.
   - Layout & Hierarchy: Menjaga struktur header asli dengan paragraf deskripsi ringkas, tombol aksi, gambar showcase, tech stack & source code tepat di bawah gambar, serta indikator _Auto-synced with GitHub README_.
-  - Automated Tests: Menambahkan 3 unit tests di `lib/github/readme.test.ts` dan 1 E2E Playwright test di `tests/e2e/project-case-study.spec.ts` (total 40 automated tests: 28 Vitest unit tests & 12 Playwright E2E tests passing 100%).
+- [31] Dynamic Tech Stack Icon Smart Resolver (Devicon CDN + Local Overrides) — selesai, tidak ada spec file (DX & scalability improvement)
+  Catatan:
+  - Hybrid Icon Engine: Mengembangkan `resolveTechIcon` di `components/common/tech-badge.tsx` yang memprioritaskan aset lokal di `/public/icons/` dan secara otomatis me-resolve lebih dari 100+ teknologi industri (seperti Angular, Redis, Playwright, Vitest, Go/Gin, Prisma, FastAPI, WebSocket, dll.) via Devicon CDN SVG resmi.
+  - Performance & Config: Menambahkan domain `cdn.jsdelivr.net` ke `images.remotePatterns` di `next.config.ts` dan mengaktifkan `unoptimized` rendering pada vektor SVG agar rendering instan dengan zero build overhead.
+  - Automated Tests: Menambahkan 3 unit tests di `components/common/tech-badge.test.ts` (total 43 automated tests: 31 Vitest unit tests & 12 Playwright E2E tests passing 100%).
+- [32] Admin Skills Auto-Sync, Quick Presets & Live Visual Icons — selesai, tidak ada spec file (code-simplification & DX improvement)
+  Catatan:
+  - 1-Click Sync Engine: Membuat Server Action `syncSkillsFromProjects()` di `app/admin/skills/actions.ts` dan tombol `SyncSkillsButton` di `app/admin/skills/page.tsx` yang secara otomatis meng-import seluruh tech stack dari proyek yang belum ada di skills, lengkap dengan deduplikasi dan inferensi kategori otomatis (`inferSkillCategory`).
+  - Quick-Pick Chips & Live Preview: Menambahkan preset 1-klik di `app/admin/skills/_components/skill-form.tsx` untuk mengisi nama skill dan kategori secara instan, serta preview langsung logo SVG resmi `<TechBadge />` saat mengetik/memilih.
+  - Visual Table Preview: Menampilkan logo SVG `<TechBadge label={skill.name} size="sm" />` di setiap baris tabel dan kartu skill pada admin dashboard.
+  - Automated Tests: Menambahkan 5 unit tests di `app/admin/skills/actions.test.ts` (total 48 automated tests: 36 Vitest unit tests & 12 Playwright E2E tests passing 100%).
+- [33] 5-Tier Industry Standard Skill Taxonomy & Bento Visual Cards — selesai, tidak ada spec file (information architecture & UX refinement)
+  Catatan:
+  - 5-Category Taxonomy: Merestrukturisasi pengelompokan skill menjadi 5 pilar standar industri: (1) `frontend_mobile` — Frontend & Mobile, (2) `backend` — Backend & APIs, (3) `database_caching` — Database & Caching, (4) `testing` — Testing & QA, (5) `tools_devops` — DevOps & Tools.
+  - Public Skills Grid: Memperbarui `components/sections/skills-grid.tsx` dengan layout 5 kartu Bento modern, nomor urut (`01` s/d `05`), ubin icon 44px, dan floating Radix UI Tooltip saat hover.
+  - Backward Compatibility: Menambahkan normalisasi kategori warisan (_legacy_) sehingga data lama tetap terpetakan dengan aman tanpa error.
+- [34] Curated 25 High-Signal Skills, CI/CD Pipeline & High-Contrast Git Icon — selesai, tidak ada spec file (UX & curation refinement)
+  Catatan:
+  - Skill Curation (Less is More): Mengeliminasi item redundan (Node.js, React Native, Vite, JS, Figma, Vercel) dan memadatkan dari 35 skill menjadi 25 skill berbobot tinggi yang paling relevan untuk Fullstack Engineer.
+  - CI/CD Integration: Menambahkan `CI/CD` di bawah `DevOps & Tools` dengan custom SVG infinity pipeline icon (`/icons/cicd.svg`).
+  - Git / GitHub Contrast Fix: Mengganti icon Git dari monochrome putih yang samar menjadi logo resmi oranye-merah Devicon CDN yang memiliki kontras tajam di light/dark mode.
+  - Automated Tests: 37 Vitest unit tests & 12 Playwright E2E tests lulus 100%.

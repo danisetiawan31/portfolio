@@ -1,9 +1,8 @@
-// app/admin/skills/page.tsx
-
 import Link from 'next/link'
 import { Pencil } from 'lucide-react'
 import { createServiceRoleClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
+import { TechBadge } from '@/components/common/tech-badge'
 import {
   Table,
   TableBody,
@@ -13,8 +12,13 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DeleteConfirmButton } from '@/components/admin/delete-confirm-button'
+import { SyncSkillsButton } from './_components/sync-skills-button'
 import { deleteSkill } from './actions'
-import { VALID_CATEGORIES } from './constants'
+import {
+  VALID_CATEGORIES,
+  CATEGORY_LABELS,
+  type CategoryType,
+} from './constants'
 
 export default async function AdminSkillsPage() {
   const supabase = createServiceRoleClient()
@@ -35,35 +39,51 @@ export default async function AdminSkillsPage() {
     )
   }
 
-  // Group by category using VALID_CATEGORIES to enforce order
-  const groupedSkills = VALID_CATEGORIES.map((category) => ({
+  // Group by category using VALID_CATEGORIES to enforce order (with legacy fallback support)
+  const groupedSkills = VALID_CATEGORIES.map((category: CategoryType) => ({
     category,
-    items: skills?.filter((skill) => skill.category === category) || [],
+    label: CATEGORY_LABELS[category] || category,
+    items:
+      skills?.filter((skill) => {
+        if (skill.category === category) return true
+        if (category === 'frontend_mobile' && skill.category === 'frontend')
+          return true
+        if (category === 'backend' && skill.category === 'backend_infra')
+          return true
+        if (category === 'database_caching' && skill.category === 'database')
+          return true
+        if (category === 'tools_devops' && skill.category === 'languages')
+          return true
+        return false
+      }) || [],
   })).filter((group) => group.items.length > 0)
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 p-4 sm:p-6 md:p-8">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
             Skills
           </h1>
           <p className="text-muted-foreground mt-0.5 text-xs sm:text-sm">
-            {skills?.length ?? 0} total
+            {skills?.length ?? 0} total skills
           </p>
         </div>
-        <Button asChild size="sm">
-          <Link href="/admin/skills/new">+ New Skill</Link>
-        </Button>
+        <div className="flex items-center gap-2.5">
+          <SyncSkillsButton />
+          <Button asChild size="sm">
+            <Link href="/admin/skills/new">+ New Skill</Link>
+          </Button>
+        </div>
       </div>
 
       {groupedSkills.length > 0 ? (
         <div className="space-y-6 sm:space-y-8">
-          {groupedSkills.map(({ category, items }) => (
+          {groupedSkills.map(({ category, label, items }) => (
             <div key={category} className="space-y-3">
-              <h2 className="text-foreground text-base font-semibold capitalize sm:text-lg">
-                {category.replace('_', ' & ')}
+              <h2 className="text-foreground text-base font-semibold sm:text-lg">
+                {label}
               </h2>
 
               {/* Mobile Card List (< md) */}
@@ -73,20 +93,23 @@ export default async function AdminSkillsPage() {
                     key={skill.id}
                     className="border-border bg-card flex items-center justify-between gap-3 rounded-xl border p-3 shadow-2xs"
                   >
-                    <div className="min-w-0 flex-1">
-                      <p className="text-foreground truncate text-sm font-semibold">
-                        {skill.name}
-                      </p>
-                      <div className="mt-0.5">
-                        {skill.is_visible ? (
-                          <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-                            ● Visible
-                          </span>
-                        ) : (
-                          <span className="text-muted-foreground text-[11px]">
-                            ○ Hidden
-                          </span>
-                        )}
+                    <div className="flex min-w-0 flex-1 items-center gap-2.5">
+                      <TechBadge label={skill.name} size="sm" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-foreground truncate text-sm font-semibold">
+                          {skill.name}
+                        </p>
+                        <div className="mt-0.5">
+                          {skill.is_visible ? (
+                            <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
+                              ● Visible
+                            </span>
+                          ) : (
+                            <span className="text-muted-foreground text-[11px]">
+                              ○ Hidden
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -116,7 +139,7 @@ export default async function AdminSkillsPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
+                      <TableHead>Skill</TableHead>
                       <TableHead>Visibility</TableHead>
                       <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
@@ -125,7 +148,12 @@ export default async function AdminSkillsPage() {
                     {items.map((skill) => (
                       <TableRow key={skill.id}>
                         <TableCell className="font-medium">
-                          {skill.name}
+                          <div className="flex items-center gap-2.5">
+                            <TechBadge label={skill.name} size="sm" />
+                            <span className="text-foreground font-semibold">
+                              {skill.name}
+                            </span>
+                          </div>
                         </TableCell>
                         <TableCell>
                           {skill.is_visible ? (
