@@ -24,17 +24,10 @@ export default async function ProjectsSection() {
   const projects = await getPublicProjects()
   const isEmpty = projects.length === 0
 
-  // If there are more than 3 projects, display the additional projects here
-  // since the top 3 are showcased in the 3D Hero stack.
-  // If 3 or fewer projects, render them as featured case studies.
-  const displayProjects = projects.length > 3 ? projects.slice(3) : projects
-
-  const sectionTitle =
-    projects.length > 3 ? 'More Selected Projects' : 'Featured Case Studies'
+  const displayProjects = projects
+  const sectionTitle = 'Featured Case Studies'
   const sectionSubtitle =
-    projects.length > 3
-      ? "Additional production applications and systems I've engineered."
-      : 'In-depth breakdown of selected engineering projects.'
+    "In-depth breakdown of production-grade applications and systems I've engineered."
 
   return (
     <SectionContainer id="projects">
