@@ -62,6 +62,7 @@ const LOCAL_ICON_MAP: Record<string, string> = {
   mongodb: '/icons/mongodb.svg',
   firebase: '/icons/firebase.svg',
   supabase: '/icons/supabase.svg',
+  sqlc: '/icons/sqlc.svg',
   redis:
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
 
@@ -187,10 +188,6 @@ const DEVICON_MAP: Record<string, string> = {
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
   terraform:
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg',
-  githubactions:
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg',
-  'github actions':
-    'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg',
   cloudflare:
     'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg',
   linux:
