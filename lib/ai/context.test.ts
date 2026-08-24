@@ -28,7 +28,7 @@ describe('AI Assistant: buildSystemPrompt', () => {
     vi.clearAllMocks()
   })
 
-  it('builds system prompt with formatted projects, experiences, skills, and CV text', async () => {
+  it('builds system prompt with formatted projects, experiences, skills, deep STAR stories from database, and CV text', async () => {
     vi.mocked(getPublicProjects).mockResolvedValueOnce([
       {
         id: '1',
@@ -41,6 +41,23 @@ describe('AI Assistant: buildSystemPrompt', () => {
         is_featured: true,
         display_order: 1,
         thumbnail_url: null,
+        star_case_study: null,
+        created_at: '',
+        updated_at: '',
+      },
+      {
+        id: '2',
+        title: 'Klinik RME',
+        slug: 'electronic-medical-record',
+        description: 'Electronic Medical Record & Queue System',
+        tech_stack: ['Angular', 'Go', 'PostgreSQL'],
+        live_url: null,
+        github_url: 'https://github.com/example/klinik-rme',
+        is_featured: true,
+        display_order: 2,
+        thumbnail_url: null,
+        star_case_study:
+          '### Situation & Problem\nHigh concurrency queue claim issues.\n### Technical Actions\nImplemented FOR UPDATE SKIP LOCKED in Go & sqlc.',
         created_at: '',
         updated_at: '',
       },
@@ -102,6 +119,7 @@ describe('AI Assistant: buildSystemPrompt', () => {
 
     const prompt = await buildSystemPrompt()
 
+    // 1. Core Profile & Metadata
     expect(prompt).toContain('Ahmad Dhani Setiawan')
     expect(prompt).toContain('Portfolio Web')
     expect(prompt).toContain('Tech Corp')
@@ -111,5 +129,12 @@ describe('AI Assistant: buildSystemPrompt', () => {
     expect(prompt).toContain('AWS Certified Developer')
     expect(prompt).toContain('Graduated Computer Science with 3.9 GPA.')
     expect(prompt).toContain('Highlight remote readiness.')
+
+    // 2. Deep Technical STAR Stories from DB
+    expect(prompt).toContain(
+      'Deep Engineering Case Studies & Architecture Trade-offs (STAR Framework)',
+    )
+    expect(prompt).toContain('Klinik RME (electronic-medical-record)')
+    expect(prompt).toContain('FOR UPDATE SKIP LOCKED')
   })
 })

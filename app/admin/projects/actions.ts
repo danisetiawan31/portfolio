@@ -140,6 +140,8 @@ export async function createProject(
     title: (formData.get('title') as string).trim(),
     slug: slugResult.slug,
     description: (formData.get('description') as string).trim(),
+    star_case_study:
+      (formData.get('star_case_study') as string)?.trim() || null,
     tech_stack: parseTechStack(formData.get('tech_stack') as string),
     thumbnail_url,
     live_url: (formData.get('live_url') as string)?.trim() || null,
@@ -211,6 +213,8 @@ export async function updateProject(
       title: (formData.get('title') as string).trim(),
       slug: slugResult.slug,
       description: (formData.get('description') as string).trim(),
+      star_case_study:
+        (formData.get('star_case_study') as string)?.trim() || null,
       tech_stack: parseTechStack(formData.get('tech_stack') as string),
       thumbnail_url,
       live_url: (formData.get('live_url') as string)?.trim() || null,

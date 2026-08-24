@@ -167,3 +167,9 @@
   - CI/CD Integration: Menambahkan `CI/CD` di bawah `DevOps & Tools` dengan custom SVG infinity pipeline icon (`/icons/cicd.svg`).
   - Git / GitHub Contrast Fix: Mengganti icon Git dari monochrome putih yang samar menjadi logo resmi oranye-merah Devicon CDN yang memiliki kontras tajam di light/dark mode.
   - Automated Tests: 37 Vitest unit tests & 12 Playwright E2E tests lulus 100%.
+- [35] Database-Driven STAR Stories & Case Studies via Admin CMS — selesai, spec: implementation_plan.md
+  Catatan:
+  - Database & Migrasi: Menambahkan kolom `star_case_study text` ke tabel `projects` di Supabase (`08_projects_star_case_study.sql`), menyelaraskan TypeScript types di `types/database.ts`, dan memigrasikan seluruh studi kasus teknis STAR ke 4 proyek live.
+  - Server Actions & Dynamic Context: Memperbarui `createProject` & `updateProject` di `app/admin/projects/actions.ts` dan mengubah `lib/ai/context.ts` agar AI membaca field `star_case_study` secara dinamis dari database Supabase secara real-time. Menghapus file konstanta hardcode `lib/constants/engineering-star-stories.ts`.
+  - Admin UI: Menambahkan field textarea `Engineering Case Study & STAR Story (optional)` di form `app/admin/projects/_components/project-form.tsx`.
+  - Automated Tests: 37 Vitest unit tests & 12 Playwright E2E tests lulus 100%.

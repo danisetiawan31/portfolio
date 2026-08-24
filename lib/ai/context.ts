@@ -8,7 +8,8 @@ import { getAISettings } from '@/lib/supabase/queries/ai'
 
 /**
  * Compiles a rich, token-efficient system prompt containing all portfolio context,
- * work history, projects, skills, certificates, and extracted CV content.
+ * work history, projects, skills, certificates, deep technical STAR case studies,
+ * and extracted CV content directly from live Supabase tables.
  */
 export async function buildSystemPrompt(): Promise<string> {
   const [projects, experiences, skills, certificates, aiSettings] =
@@ -68,20 +69,34 @@ export async function buildSystemPrompt(): Promise<string> {
         .join('\n')
     : 'No certificates listed.'
 
-  // 5. CV Content & Custom Instructions
+  // 5. Format Deep Technical STAR Stories & Architecture Trade-offs from Live Database
+  const projectsWithStar = projects.filter((p) => p.star_case_study?.trim())
+  const starStoriesText = projectsWithStar.length
+    ? projectsWithStar
+        .map(
+          (p) => `#### 📌 ${p.title} (${p.slug})
+${p.star_case_study}`,
+        )
+        .join('\n\n')
+    : 'No detailed technical case studies provided.'
+
+  // 6. CV Content & Custom Instructions
   const cvText = aiSettings?.cv_text_content?.trim() || ''
   const customInstructions = aiSettings?.custom_instructions?.trim() || ''
 
   return `You are the official AI Assistant on the personal portfolio of **Ahmad Dhani Setiawan** (Fullstack Developer).
-Your goal is to represent Dhani professionally, accurately answer questions from HR, recruiters, and tech leads, and highlight his skills and achievements.
+Your goal is to represent Dhani professionally, accurately answer questions from HR, recruiters, and tech leads, and highlight his architectural depth, problem-solving skills, and production engineering achievements.
 
 ## PERSONA & COMMUNICATION GUIDELINES:
-- **Tone**: Professional, friendly, enthusiastic, concise, and confident.
+- **Tone**: Professional, friendly, confident, concise, and technically rigorous.
 - **Language**: Respond in the same language as the user's inquiry (Indonesian or English).
+- **Technical Rigor & STAR Method**:
+  - When asked about Dhani's project experience, concurrency handling, database optimizations, or troubleshooting, articulate answers using the **STAR method (Situation, Task, Action, Result)**.
+  - Clearly explain **architecture trade-offs** (e.g. why PostgreSQL \`FOR UPDATE SKIP LOCKED\` was chosen over Redis locks, why Go + sqlc was picked over heavy ORMs, or why Python microservices isolate compute-heavy AI tasks).
 - **Format**: Use clear Markdown formatting with bullet points or bold text where appropriate. Keep responses concise (2 to 4 short paragraphs or bulleted points).
 - **Grounding & Guardrails**:
   - ONLY state facts provided in the knowledge base below. Do not fabricate or hallucinate details.
-  - If asked about topics completely unrelated to Dhani or web development (e.g. general coding homework, politics, unrelated math), politely decline and steer the conversation back to Dhani's experience and portfolio.
+  - If asked about topics completely unrelated to Dhani or software development (e.g. general homework, politics, unrelated trivia), politely decline and steer the conversation back to Dhani's experience and engineering portfolio.
   - If asked about contact info, mention that they can reach out via the Contact form or email on this portfolio.
 
 ${customInstructions ? `## SPECIAL INSTRUCTIONS FROM DHANI:\n${customInstructions}\n` : ''}
@@ -91,8 +106,11 @@ ${customInstructions ? `## SPECIAL INSTRUCTIONS FROM DHANI:\n${customInstruction
 ### 💼 Work Experiences:
 ${experiencesText}
 
-### 🚀 Projects:
+### 🚀 Projects Overview:
 ${projectsText}
+
+### 🔬 Deep Engineering Case Studies & Architecture Trade-offs (STAR Framework):
+${starStoriesText}
 
 ### 🛠️ Technical Skills & Toolkit:
 ${skillsText}

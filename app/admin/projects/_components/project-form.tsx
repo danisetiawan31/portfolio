@@ -151,6 +151,31 @@ export function ProjectForm({ project }: ProjectFormProps) {
         )}
       </div>
 
+      {/* Engineering Case Study & STAR Story */}
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="star_case_study">
+            Engineering Case Study & STAR Story (optional)
+          </Label>
+          <span className="text-muted-foreground text-[11px]">
+            Used by AI Assistant & Technical Breakdown
+          </span>
+        </div>
+        <Textarea
+          id="star_case_study"
+          name="star_case_study"
+          rows={6}
+          placeholder="### Situation & Problem...&#10;### Engineering Task...&#10;### Technical Actions & Architecture...&#10;### Measurable Results...&#10;### Key Architecture Decisions & Trade-Offs..."
+          defaultValue={project?.star_case_study ?? ''}
+          disabled={isPending}
+          className="font-mono text-xs leading-relaxed sm:text-sm"
+        />
+        <p className="text-muted-foreground text-xs">
+          Format STAR (Situation, Task, Action, Result) dan alasan teknis
+          pemilihan arsitektur / trade-offs.
+        </p>
+      </div>
+
       {/* Tech Stack */}
       <div className="space-y-1.5">
         <Label htmlFor="tech_stack">Tech Stack *</Label>

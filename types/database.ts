@@ -145,6 +145,7 @@ export type Database = {
           is_featured: boolean
           live_url: string | null
           slug: string
+          star_case_study: string | null
           tech_stack: string[]
           thumbnail_url: string | null
           title: string
@@ -159,6 +160,7 @@ export type Database = {
           is_featured?: boolean
           live_url?: string | null
           slug: string
+          star_case_study?: string | null
           tech_stack?: string[]
           thumbnail_url?: string | null
           title: string
@@ -173,6 +175,7 @@ export type Database = {
           is_featured?: boolean
           live_url?: string | null
           slug?: string
+          star_case_study?: string | null
           tech_stack?: string[]
           thumbnail_url?: string | null
           title?: string
