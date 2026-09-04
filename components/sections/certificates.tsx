@@ -14,6 +14,7 @@ export default async function CertificatesSection() {
     .select('*')
     .eq('is_featured', true)
     .order('display_order', { ascending: true })
+    .limit(6)
 
   // Specification: "Kalau tidak ada satupun yang featured, section (termasuk heading-nya) tidak dirender sama sekali — bukan ditampilkan kosong."
   if (!certificates || certificates.length === 0) {
